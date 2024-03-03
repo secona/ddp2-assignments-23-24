@@ -122,14 +122,19 @@ public class OrderGenerator {
     public static String getOngkir(String lokasi) {
         switch (lokasi) {
             case "P":
+            case "p":
                 return "Rp 10.000";
             case "U":
+            case "u":
                 return "Rp 20.000";
             case "T":
+            case "t":
                 return "Rp 35.000";
             case "S":
+            case "s":
                 return "Rp 40.000";
             case "B":
+            case "b":
                 return "Rp 60.000";
             default:
                 return "";
@@ -154,11 +159,12 @@ public class OrderGenerator {
                 .insert(5, '/')
                 .toString();
 
-        String result = "Bill:";
-        result += "\nOrder ID: " + orderID;
-        result += "\nTanggal Pemesanan: " + tanggal;
-        result += "\nLokasi Pengiriman: " + lokasi;
-        result += "\nBiaya Ongkos Kirim: " + ongkir;
+        String result = "Bill:"
+                + "\nOrder ID: " + orderID
+                + "\nTanggal Pemesanan: " + tanggal
+                + "\nLokasi Pengiriman: " + lokasi.toUpperCase()
+                + "\nBiaya Ongkos Kirim: " + ongkir
+                + "\n";
 
         return result;
     }
