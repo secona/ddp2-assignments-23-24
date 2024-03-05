@@ -69,7 +69,7 @@ public class OrderGenerator {
         // recursive case
         Character firstChar = namaRestoran.charAt(0);
         if (firstChar.equals(' ')) {
-            return generateKodeRestoran(namaRestoran.substring(1), length - 1);
+            return generateKodeRestoran(namaRestoran.substring(1), length);
         } else {
             return Character.toUpperCase(firstChar)
                     + generateKodeRestoran(namaRestoran.substring(1), length - 1);
