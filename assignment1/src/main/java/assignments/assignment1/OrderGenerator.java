@@ -198,15 +198,21 @@ public class OrderGenerator {
         String ongkir = getOngkir(lokasi);
 
         // tanggal dengan ditambahkan `/`
-        String tanggal = (new StringBuilder(orderID.substring(4, 12)))
-                .insert(2, '/') // setelah hari, sebelum bulan
-                .insert(5, '/') // setelah bulan, sebelum tahun
-                .toString();
+        String tanggal = orderID.substring(4, 12);
+        String formattedTanggal = "";
+        // loop untuk setiap karakter dalam tanggal
+        for (int i = 0; i < tanggal.length(); i++) {
+            formattedTanggal += tanggal.charAt(i);
+            // `/` ditambahkan setelah angka kedua (index 1) dan angka keempat (index 3)
+            if (i == 1 || i == 3) {
+                formattedTanggal += '/';
+            }
+        }
 
         // concatenate resultnya menjadi 1
         String result = "Bill:"
                 + "\nOrder ID: " + orderID
-                + "\nTanggal Pemesanan: " + tanggal
+                + "\nTanggal Pemesanan: " + formattedTanggal
                 + "\nLokasi Pengiriman: " + lokasi.toUpperCase()
                 + "\nBiaya Ongkos Kirim: " + ongkir
                 + "\n";
