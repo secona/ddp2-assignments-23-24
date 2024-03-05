@@ -4,7 +4,16 @@ import java.util.Scanner;
 
 public class OrderGenerator {
     private static final Scanner input = new Scanner(System.in);
+
+    /**
+     * regex ini akan match bentuk DD/MM/YYYY di mana D, M, dan Y adalah digit
+     */
     private static final String dateRegex = "\\d{2}\\/\\d{2}\\/\\d{4}";
+
+    /**
+     * regex ini akan match dengan string minimal length 1 yang semua karakternya adalah digit
+     */
+    private static final String phoneNumberRegex = "\\d+";
 
     /*
      * Anda boleh membuat method baru sesuai kebutuhan Anda
@@ -257,7 +266,7 @@ public class OrderGenerator {
                         noTelepon = input.nextLine();
 
                         // nomor telepon harus digit semua
-                        if (!noTelepon.matches("\\d+")) {
+                        if (!noTelepon.matches(phoneNumberRegex)) {
                             System.out.println("Harap masukkan nomor telepon dalam bentuk bilangan bulat positif.\n");
                             continue; // ulang dari awal
                         }
