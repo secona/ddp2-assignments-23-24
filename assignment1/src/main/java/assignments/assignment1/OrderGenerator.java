@@ -213,7 +213,7 @@ public class OrderGenerator {
 
         // concatenate resultnya menjadi 1
         String result = "Bill:"
-                + "\nOrder ID: " + orderID
+                + "\nOrder ID: " + orderID.toUpperCase()
                 + "\nTanggal Pemesanan: " + formattedTanggal
                 + "\nLokasi Pengiriman: " + lokasi.toUpperCase()
                 + "\nBiaya Ongkos Kirim: " + ongkir
@@ -290,7 +290,7 @@ public class OrderGenerator {
                     while (true) {
                         // meminta order id
                         System.out.print("Order ID: ");
-                        orderID = input.nextLine();
+                        orderID = input.nextLine().toUpperCase();
 
                         // panjang order id harus 16
                         if (orderID.length() < 16) {
