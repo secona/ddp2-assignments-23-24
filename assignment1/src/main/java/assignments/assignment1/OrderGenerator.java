@@ -68,11 +68,11 @@ public class OrderGenerator {
 
         // recursive case
         int newLength = length;
-        char firstChar = namaRestoran.charAt(0);
+        Character firstChar = namaRestoran.charAt(0);
         char result = 0; // empty string
 
         // jika karakter pertamanya adalah huruf
-        if (Character.isLetter(firstChar)) {
+        if (!firstChar.equals(' ')) {
             // ubah result menjadi karakter tersebut
             result = Character.toUpperCase(firstChar);
             // decrement length dengan 1, karena string akhir sudah kita tambahkan satu
