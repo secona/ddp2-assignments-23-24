@@ -67,20 +67,13 @@ public class OrderGenerator {
         }
 
         // recursive case
-        int newLength = length;
         Character firstChar = namaRestoran.charAt(0);
-        char result = 0; // empty string
-
-        // jika karakter pertamanya adalah huruf
-        if (!firstChar.equals(' ')) {
-            // ubah result menjadi karakter tersebut
-            result = Character.toUpperCase(firstChar);
-            // decrement length dengan 1, karena string akhir sudah kita tambahkan satu
-            // karakter
-            newLength = length - 1;
+        if (firstChar.equals(' ')) {
+            return generateKodeRestoran(namaRestoran.substring(1), length - 1);
+        } else {
+            return Character.toUpperCase(firstChar)
+                    + generateKodeRestoran(namaRestoran.substring(1), length - 1);
         }
-
-        return result + generateKodeRestoran(namaRestoran.substring(1), newLength);
     }
 
     /**
