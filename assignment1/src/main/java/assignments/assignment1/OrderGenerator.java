@@ -46,10 +46,10 @@ public class OrderGenerator {
      *
      * @return pilihan menu yang diinginkan user
      */
-    public static int getMenuInput() {
+    public static String getMenuInput() {
         System.out.println("---------------------------------------------");
         System.out.print("Pilihan menu: ");
-        return input.nextInt();
+        return input.nextLine().strip();
     }
 
     /**
@@ -222,11 +222,11 @@ public class OrderGenerator {
 
         // main loop
         while (running) {
-            int pilihan = getMenuInput();
+            String pilihan = getMenuInput();
 
             switch (pilihan) {
                 // generate order id
-                case 1: {
+                case "1": {
                     String namaRestoran;
                     String tanggalOrder;
                     String noTelepon;
@@ -234,17 +234,17 @@ public class OrderGenerator {
                     while (true) {
                         // meminta nama restoran
                         System.out.print("Nama Restoran: ");
-                        namaRestoran = input.next();
+                        namaRestoran = input.nextLine();
 
-                        // panjang nama restoran harus >= 4
-                        if (namaRestoran.length() < 4) {
+                        // panjang kode restoran harus sama dengan 4
+                        if (generateKodeRestoran(namaRestoran, 4).length() != 4) {
                             System.out.println("Nama Restoran tidak valid!\n");
                             continue; // ulang dari awal
                         }
 
                         // meminta tanggal pemesanan
                         System.out.print("Tanggal Pemesanan: ");
-                        tanggalOrder = input.next();
+                        tanggalOrder = input.nextLine();
 
                         // tanggal pemesanan harus dalam format DD/MM/YYYY
                         if (!tanggalOrder.matches(dateRegex)) {
@@ -254,7 +254,7 @@ public class OrderGenerator {
 
                         // meminta nomor telepon
                         System.out.print("No. Telpon: ");
-                        noTelepon = input.next();
+                        noTelepon = input.nextLine();
 
                         // nomor telepon harus digit semua
                         if (!noTelepon.matches("\\d+")) {
@@ -274,14 +274,14 @@ public class OrderGenerator {
                 }
 
                 // generate bill
-                case 2: {
+                case "2": {
                     String orderID;
                     String lokasi;
 
                     while (true) {
                         // meminta order id
                         System.out.print("Order ID: ");
-                        orderID = input.next();
+                        orderID = input.nextLine();
 
                         // panjang order id harus 16
                         if (orderID.length() < 16) {
@@ -299,7 +299,7 @@ public class OrderGenerator {
 
                         // meminta lokasi pengiriman
                         System.out.print("Lokasi Pengiriman: ");
-                        lokasi = input.next().toUpperCase().strip();
+                        lokasi = input.nextLine().toUpperCase().strip();
 
                         // lokasi pengiriman harus antara P, U, T, S, atau B
                         if (!(lokasi.equals("P")
@@ -323,12 +323,16 @@ public class OrderGenerator {
                 }
 
                 // exit
-                case 3: {
+                case "3": {
                     System.out.println("Terima kasih telah menggunakan DepeFood!");
                     // memberi tahu jika program sudah tidak running
                     running = false;
                     // continue supaya tidak memanggil showPilihMenu
                     continue;
+                }
+
+                default: {
+                    System.out.println("Harap masukkan opsi yang tersedia!");
                 }
             }
 
