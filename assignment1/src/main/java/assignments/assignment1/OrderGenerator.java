@@ -143,7 +143,7 @@ public class OrderGenerator {
 
         // modulokan dengan 100 dan tambahkan ke result
         jumlahNoTelepon %= 100;
-        result += jumlahNoTelepon;
+        result += String.format("%02d", jumlahNoTelepon);
 
         // tambahkan checksum menggunakan order id yang sudah kita buat yang belum ada
         // checksumnya
@@ -258,7 +258,7 @@ public class OrderGenerator {
                         noTelepon = input.next();
 
                         // nomor telepon harus digit semua
-                        if (!noTelepon.matches("\\d*")) {
+                        if (!noTelepon.matches("\\d+")) {
                             System.out.println("Harap masukkan nomor telepon dalam bentuk bilangan bulat positif.\n");
                             continue; // ulang dari awal
                         }
