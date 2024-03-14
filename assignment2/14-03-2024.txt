@@ -1,0 +1,199 @@
+>>=======================================<<
+|| ___                 ___             _ ||
+||| . \ ___  ___  ___ | __>___  ___  _| |||
+||| | |/ ._>| . \/ ._>| _>/ . \/ . \/ . |||
+|||___/\___.|  _/\___.|_| \___/\___/\___|||
+||          |_|                          ||
+>>=======================================<<
+Selamat datang di DepeFood!
+--------------------------------------------
+Pilih menu:
+1. Login
+2. Keluar
+--------------------------------------------
+Pilihan menu: 1
+
+Silakan Login:
+Nama: Admin
+Nomor Telepon: 123456789
+Selamat Datang Admin!
+
+--------------------------------------------
+Pilih menu:
+1. Tambah Restoran
+2. Hapus Restoran
+3. Keluar
+--------------------------------------------
+Pilihan menu: 1
+--------------Tambah Restoran----------------
+Nama: Holycow!
+Jumlah Makanan: 3
+Tenderloin Steak 20000
+Sirloin Steak 300000
+Apel 100000
+Restaurant Holycow! Berhasil terdaftar.
+--------------------------------------------
+Pilih menu:
+1. Tambah Restoran
+2. Hapus Restoran
+3. Keluar
+--------------------------------------------
+Pilihan menu: 1
+--------------Tambah Restoran----------------
+Nama: Holycow!
+Restoran dengan nama Holycow! sudah pernah terdaftar. Mohon masukkan nama yang berbeda!
+
+Nama: Sat
+Nama Restoran tidak valid!
+
+Nama: Sate Pacil
+Jumlah Makanan: 2
+Sate Ayam 12asal
+Sate Kambing 20000
+Harga menu harus bilangan bulat!
+
+Nama: Sate Pacil
+Jumlah Makanan: 2
+Sate Ayam 15000
+Sate Kambing 20000
+Restaurant Sate Pacil Berhasil terdaftar.
+--------------------------------------------
+Pilih menu:
+1. Tambah Restoran
+2. Hapus Restoran
+3. Keluar
+--------------------------------------------
+Pilihan menu: 2
+--------------Hapus Restoran---------------
+Nama Restoran: Ayam Mas Roni
+Restoran tidak terdaftar pada sistem.
+
+Nama Restoran: SaTe pacil
+Restoran berhasil dihapus.
+
+--------------------------------------------
+Pilih menu:
+1. Tambah Restoran
+2. Hapus Restoran
+3. Keluar
+--------------------------------------------
+Pilihan menu: 3
+
+>>=======================================<<
+|| ___                 ___             _ ||
+||| . \ ___  ___  ___ | __>___  ___  _| |||
+||| | |/ ._>| . \/ ._>| _>/ . \/ . \/ . |||
+|||___/\___.|  _/\___.|_| \___/\___/\___|||
+||          |_|                          ||
+>>=======================================<<
+Selamat datang di DepeFood!
+--------------------------------------------
+Pilih menu:
+1. Login
+2. Keluar
+--------------------------------------------
+Pilihan menu: 1
+
+Silakan Login:
+Nama: Thomas N
+Nomor Telepon: 9928765403
+Selamat Datang Thomas N!
+
+--------------------------------------------
+Pilih menu:
+1. Buat Pesanan
+2. Cetak Bill
+3. Lihat Menu
+4. Update Status Pesanan
+5. Keluar
+--------------------------------------------
+Pilihan menu: 1
+--------------Buat Pesanan----------------
+Nama Restoran: Sate Pacil
+Restoran tidak terdaftar pada sistem.
+
+Nama Restoran: Holycow!
+Tanggal Pemesanan (DD/MM/YYYY): 18/02/2024
+Jumlah Pesanan: 2
+Order:
+Tenderloin Steak
+Sirloin Steak
+Pesanan dengan ID HOLY1802202453C3 diterima!
+
+--------------------------------------------
+Pilih menu:
+1. Buat Pesanan
+2. Cetak Bill
+3. Lihat Menu
+4. Update Status Pesanan
+5. Keluar
+--------------------------------------------
+Pilihan menu: 2
+--------------Cetak Bill----------------
+Masukkan Order ID: HOLY1802202453C3
+Bill:
+Order ID: HOLY1802202453C3
+Tanggal Pemesanan: 18/02/2024
+Restaurant: Holycow!
+Lokasi Pengiriman: P
+Status Pengiriman: Not Finished
+Pesanan:
+- Tenderloin Steak 20000.0
+- Sirloin Steak 300000.0
+Biaya Ongkos Kirim: Rp 10.000
+
+--------------------------------------------
+Pilih menu:
+1. Buat Pesanan
+2. Cetak Bill
+3. Lihat Menu
+4. Update Status Pesanan
+5. Keluar
+--------------------------------------------
+Pilihan menu: 3
+-------------Lihat Menu---------------
+Nama Restoran: Holycow!
+Menu:
+1. Tenderloin Steak 20000
+2. Sirloin Steak 300000
+3. Apel 100000
+
+--------------------------------------------
+Pilih menu:
+1. Buat Pesanan
+2. Cetak Bill
+3. Lihat Menu
+4. Update Status Pesanan
+5. Keluar
+--------------------------------------------
+Pilihan menu: 4
+-------------Update Status Pesanan---------------
+Masukkan Order ID: HOLY1802202453C3
+Status: Selesai
+Status pesanan dengan ID HOLY1802202453C3 berhasil diupdate!
+--------------------------------------------
+Pilih menu:
+1. Buat Pesanan
+2. Cetak Bill
+3. Lihat Menu
+4. Update Status Pesanan
+5. Keluar
+--------------------------------------------
+Pilihan menu: 5
+
+>>=======================================<<
+|| ___                 ___             _ ||
+||| . \ ___  ___  ___ | __>___  ___  _| |||
+||| | |/ ._>| . \/ ._>| _>/ . \/ . \/ . |||
+|||___/\___.|  _/\___.|_| \___/\___/\___|||
+||          |_|                          ||
+>>=======================================<<
+Selamat datang di DepeFood!
+--------------------------------------------
+Pilih menu:
+1. Login
+2. Keluar
+--------------------------------------------
+Pilihan menu: 2
+
+Terima kasih telah menggunakan DepeFood ^___^
