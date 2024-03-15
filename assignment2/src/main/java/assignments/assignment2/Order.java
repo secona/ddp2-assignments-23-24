@@ -20,10 +20,6 @@ public class Order {
 		return orderFinished;
 	}
 
-	public void setOrderFinished(boolean orderFinished) {
-		this.orderFinished = orderFinished;
-	}
-
 	public boolean isOrderID(String orderID) {
 		return this.orderID.equalsIgnoreCase(orderID);
 	}
@@ -42,6 +38,26 @@ public class Order {
 		this.orderFinished = false;
 	}
 
+	/**
+	 * Method ini digunakan untuk meng-update status dari order.
+	 * @param finished Status yang baru
+	 * @return Menyatakan update-nya berhasil atau tidak
+	 */
+	public boolean updateStatus(boolean finished) {
+		if (orderFinished == finished) {
+			System.out.printf("Status pesanan dengan ID %v tidak berhasil diupdate!\n", orderID);
+			return false;
+		} else {
+			orderFinished = finished;
+			System.out.printf("Status pesanan dengan ID %s berhasil diupdate!\n", orderID);
+			return true;
+		}
+	}
+
+	/**
+	 * Method ini mengubah items yang dibeli menjadi string berupa daftar dengan prefix "- ".
+	 * @return Daftar items dengan prefix "- "
+	 */
 	public String getPesananString() {
 		String result = "";
 
@@ -56,6 +72,10 @@ public class Order {
 		return result;
 	}
 
+	/**
+	 * Method ini menghitung total harga dari semua item.
+	 * @return Total harga dari semua item
+	 */
 	public int totalHarga() {
 		int total = 0;
 
@@ -67,6 +87,10 @@ public class Order {
 		return total;
 	}
 
+	/**
+	 * Method ini mengubah order menjadi string dengan data lokasi user
+	 * @return Representasi string dari order dengan lokasi user
+	 */
 	public String toString(String lokasiUser) {
 		return "Bill:" +
 				"\nOrder ID: " + this.orderID +
@@ -76,6 +100,6 @@ public class Order {
 				"\nStatus Pengiriman: " + (this.orderFinished ? "Finished" : "Not Finished") +
 				"\nPesanan:\n" + this.getPesananString() +
 				"\nBiaya Ongkos Kirim: " + OrderGenerator.getOngkir(lokasiUser) +
-				"\nTotal Biaya: " + "TOTAL BIAYA";
+				"\nTotal Biaya: " + "TOTAL BIAYA"; // TODO: total biaya
 	}
 }

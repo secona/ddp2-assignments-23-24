@@ -16,6 +16,13 @@ public class Restaurant {
 	}
 
 	/**
+	 * Method ini digunakan untuk menentukan kesamaan nama restoran
+	 */
+	public boolean isName(String nama) {
+		return this.nama.equalsIgnoreCase(nama);
+	}
+
+	/**
 	 * Method ini digunakan untuk menambahkan satu menu ke restoran
 	 */
 	public void addMenu(Menu newMenu) {

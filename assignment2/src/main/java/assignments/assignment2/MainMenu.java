@@ -100,7 +100,7 @@ public class MainMenu {
 
     public static Restaurant getRestaurant(String namaRestoran) {
         for (Restaurant restaurant : restoList) {
-            if (restaurant.getNama().equals(namaRestoran)) {
+            if (restaurant.isName(namaRestoran)) {
                 return restaurant;
             }
         }
@@ -119,7 +119,7 @@ public class MainMenu {
             // cek jika restoran ada
             Restaurant restoran = null;
             for (Restaurant currentRestoran : restoList) {
-                if (currentRestoran.getNama().equalsIgnoreCase(namaRestoran)) {
+                if (currentRestoran.isName(namaRestoran)) {
                     restoran = currentRestoran;
                     break;
                 }
@@ -190,14 +190,11 @@ public class MainMenu {
             String namaRestoran = input.nextLine();
 
             for (Restaurant restoran : restoList) {
-                if (restoran.getNama().equals(namaRestoran)) {
+                if (restoran.isName(namaRestoran)) {
                     System.out.println("Menu:");
                     for (int i = 0; i < restoran.menuLength(); i++) {
                         Menu menu = restoran.getOneMenu(i);
-                        System.out.printf("%d. %s %d\n",
-                                i + 1,
-                                menu.getNamaMakanan(),
-                                (int) menu.getHarga());
+                        System.out.printf("%d. %s\n", i + 1, menu.toString());
                     }
 
                     return;
@@ -226,14 +223,13 @@ public class MainMenu {
             // ambil input update status
             System.out.print("Status: ");
             String status = input.nextLine();
-            boolean statusSelesai = status.equals("Selesai");
+            boolean selesai = status.equalsIgnoreCase("Selesai");
 
-            // cek jika yang dituju sama atau tidak
-            if (order.isOrderFinished() == statusSelesai) {
-                System.out.printf("Status pesanan dengan ID %v tidak berhasil diupdate!\n", orderID);
-            } else {
-                order.setOrderFinished(statusSelesai);
-                System.out.printf("Status pesanan dengan ID %s berhasil diupdate!", orderID);
+            // update status
+            // ok = true if successful
+            boolean ok = order.updateStatus(selesai);
+            
+            if (ok) {
                 break;
             }
         }
@@ -326,7 +322,7 @@ public class MainMenu {
             for (int i = 0; i < restoList.size(); i++) {
                 Restaurant currentRestoran = restoList.get(i);
                 // jika ditemukan restoran dengan nama yang sama
-                if (currentRestoran.getNama().equalsIgnoreCase(namaRestoran)) {
+                if (currentRestoran.isName(namaRestoran)) {
                     restoList.remove(i);
                     System.out.println("Restoran berhasil dihapus.");
                     return;
