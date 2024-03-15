@@ -6,17 +6,23 @@ public class Restaurant {
 	private String nama;
 	private ArrayList<Menu> menu;
 
-	public String getNama() {
-		return nama;
-	}
-
 	public Restaurant(String nama) {
 		this.nama = nama;
 		this.menu = new ArrayList<Menu>();
 	}
 
 	/**
-	 * Method ini digunakan untuk menentukan kesamaan nama restoran
+	 * Getter untuk instance variable nama.
+	 * @return nama
+	 */
+	public String getNama() {
+		return nama;
+	}
+
+	/**
+	 * Membandingkan nama dari restaurant.
+	 * @param nama Nama yang dibandingkan
+	 * @return Menyatakan apakah namanya sama
 	 */
 	public boolean isName(String nama) {
 		return this.nama.equalsIgnoreCase(nama);
@@ -24,6 +30,7 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk menambahkan satu menu ke restoran
+	 * @param newMenu menu yang akan ditambahkan
 	 */
 	public void addMenu(Menu newMenu) {
 		int i = 0;
@@ -54,6 +61,7 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk mendapatkan banuyaknya menu
+	 * @return panjang dari menu
 	 */
 	public int menuLength() {
 		return menu.size();
@@ -62,6 +70,8 @@ public class Restaurant {
 	/**
 	 * Method ini digunakan untuk mencari menu dalam restoran berdasarkan nama
 	 * makanan
+	 * @param namaMakanan nama dari menu makanan yang dicari
+	 * @return menu atau null
 	 */
 	public Menu getOneMenu(String namaMakanan) {
 		for (Menu menu : this.menu) {
@@ -74,6 +84,8 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk mencari menu dalam restoran berdasarkan index
+	 * @param index index dari menu yang dicari
+	 * @return menu atau null
 	 */
 	public Menu getOneMenu(int index) {
 		return menu.get(index);

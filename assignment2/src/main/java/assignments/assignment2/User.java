@@ -10,6 +10,15 @@ public class User {
 	private String role;
 	private ArrayList<Order> orderHistory;
 
+	public User(String nama, String nomorTelepon, String email, String lokasi, String role) {
+		this.name = nama;
+		this.nomorTelepon = nomorTelepon;
+		this.email = email;
+		this.lokasi = lokasi;
+		this.role = role;
+		this.orderHistory = new ArrayList<Order>();
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -32,14 +41,5 @@ public class User {
 
 	public void addOrder(Order order) {
 		orderHistory.add(order);
-	}
-
-	public User(String nama, String nomorTelepon, String email, String lokasi, String role) {
-		this.name = nama;
-		this.nomorTelepon = nomorTelepon;
-		this.email = email;
-		this.lokasi = lokasi;
-		this.role = role;
-		this.orderHistory = new ArrayList<Order>();
 	}
 }

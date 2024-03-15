@@ -12,18 +12,6 @@ public class Order {
 	private ArrayList<Menu> items;
 	private boolean orderFinished;
 
-	public String getOrderID() {
-		return orderID;
-	}
-
-	public boolean isOrderFinished() {
-		return orderFinished;
-	}
-
-	public boolean isOrderID(String orderID) {
-		return this.orderID.equalsIgnoreCase(orderID);
-	}
-
 	public Order(
 			String orderID,
 			String tanggalPemesanan,
@@ -36,6 +24,31 @@ public class Order {
 		this.restaurant = restaurant;
 		this.items = items;
 		this.orderFinished = false;
+	}
+
+	/**
+	 * Getter untuk instance variable orderID.
+	 * @return orderID
+	 */
+	public String getOrderID() {
+		return orderID;
+	}
+
+	/**
+	 * Getter untuk instance variable orderFinished
+	 * @return orderFinished
+	 */
+	public boolean isOrderFinished() {
+		return orderFinished;
+	}
+
+	/**
+	 * Membandingkan orderID
+	 * @param orderID orderID yang dibandingkan
+	 * @return Menyatakan apakah orderID-nya sama
+	 */
+	public boolean isOrderID(String orderID) {
+		return this.orderID.equalsIgnoreCase(orderID);
 	}
 
 	/**
@@ -89,6 +102,7 @@ public class Order {
 
 	/**
 	 * Method ini mengubah order menjadi string dengan data lokasi user
+	 * @param lokasiUser lokasi dari logged in user
 	 * @return Representasi string dari order dengan lokasi user
 	 */
 	public String toString(String lokasiUser) {
