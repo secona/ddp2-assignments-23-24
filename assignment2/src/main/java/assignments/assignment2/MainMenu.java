@@ -157,7 +157,8 @@ public class MainMenu {
 
             // inisiasi Order
             String orderID = OrderGenerator.generateOrderID(namaRestoran, tanggalPemesanan, user.getNomorTelepon());
-            Order order = new Order(orderID, tanggalPemesanan, 0, restoran, items);
+            int ongkosKirim = Order.calculateOngkosKirim(user.getLokasi());
+            Order order = new Order(orderID, tanggalPemesanan, ongkosKirim, restoran, items);
             user.addOrder(order);
 
             // done
