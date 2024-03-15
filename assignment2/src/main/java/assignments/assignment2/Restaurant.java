@@ -18,8 +18,31 @@ public class Restaurant {
 	/**
 	 * Method ini digunakan untuk menambahkan satu menu ke restoran
 	 */
-	public void addMenu(Menu menu) {
-		this.menu.add(menu);
+	public void addMenu(Menu newMenu) {
+		int i = 0;
+
+		// loop untuk mencari posisi untuk menu baru
+		for (; i < this.menu.size(); i++) {
+			Menu curr = this.menu.get(i);
+
+			// jika harga keduanya sama, kita bandingkan nama makanannya berdasarkan alfabet
+			if (newMenu.getHarga() == curr.getHarga()) {
+				// jika nama makanan menu baru lebih duluan berdasarkan alfabet, letak menu baru
+				// seharusnya index ini
+				if (curr.getNamaMakanan().compareTo(newMenu.getNamaMakanan()) >= 0) {
+					break;
+				}
+			}
+
+			// jika harga menu baru lebih murah, nama makanannya lebih akhir dari pada nama
+			// makanan lain dengan harga yang sama. artinya posisi menu baru seharusnya
+			// index ini
+			if (newMenu.getHarga() < curr.getHarga()) {
+				break;
+			}
+		}
+
+		this.menu.add(i, newMenu);
 	}
 
 	/**
