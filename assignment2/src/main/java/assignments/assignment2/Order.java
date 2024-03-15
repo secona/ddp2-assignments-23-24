@@ -16,18 +16,6 @@ public class Order {
 		return orderID;
 	}
 
-	public void setOrderID(String orderID) {
-		this.orderID = orderID;
-	}
-
-	public void setTanggalPemesanan(String tanggalPemesanan) {
-		this.tanggalPemesanan = tanggalPemesanan;
-	}
-
-	public void setBiayaOngkosKirim(int biayaOngkosKirim) {
-		this.biayaOngkosKirim = biayaOngkosKirim;
-	}
-
 	public boolean isOrderFinished() {
 		return orderFinished;
 	}
@@ -36,13 +24,22 @@ public class Order {
 		this.orderFinished = orderFinished;
 	}
 
-	public void addItem(Menu menu) {
-		this.items.add(menu);
+	public boolean isOrderID(String orderID) {
+		return this.orderID.equalsIgnoreCase(orderID);
 	}
 
-	public Order(Restaurant restaurant) {
+	public Order(
+			String orderID,
+			String tanggalPemesanan,
+			int biayaOngkosKirim,
+			Restaurant restaurant,
+			ArrayList<Menu> items) {
+		this.orderID = orderID;
+		this.tanggalPemesanan = tanggalPemesanan;
+		this.biayaOngkosKirim = biayaOngkosKirim;
 		this.restaurant = restaurant;
-		this.items = new ArrayList<Menu>();
+		this.items = items;
+		this.orderFinished = false;
 	}
 
 	public String getPesananString() {

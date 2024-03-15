@@ -89,7 +89,7 @@ public class MainMenu {
     public static Order getOrder(String orderID) {
         for (User user : userList) {
             for (Order order : user.getOrderHistory()) {
-                if (order.getOrderID().equalsIgnoreCase(orderID)) {
+                if (order.isOrderID(orderID)) {
                     return order;
                 }
             }
@@ -131,16 +131,11 @@ public class MainMenu {
                 continue;
             }
 
-            // inisiasi Order
-            Order order = new Order(restoran);
-
             // ambil input tanggal pemesanan
             System.out.print("Tanggal Pemesanan (DD/MM/YYYY): ");
             String tanggalPemesanan = input.nextLine();
 
             // TODO: validation
-
-            order.setTanggalPemesanan(tanggalPemesanan);
 
             // ambil input jumlah pesanan
             System.out.print("Jumlah Pesanan: ");
@@ -149,22 +144,24 @@ public class MainMenu {
 
             // loop sebanyak jumlah pesanan
             System.out.println("Order:");
+            ArrayList<Menu> items = new ArrayList<Menu>();
             for (int i = 0; i < jumlahPesanan; i++) {
                 // mencari nama makanan
                 String namaMakanan = input.nextLine();
                 Menu menu = restoran.getOneMenu(namaMakanan);
 
                 if (menu != null) {
-                    order.addItem(menu);
+                    items.add(menu);
                 }
             }
 
+            // inisiasi Order
             String orderID = OrderGenerator.generateOrderID(namaRestoran, tanggalPemesanan, user.getNomorTelepon());
-            order.setOrderID(orderID);
+            Order order = new Order(orderID, tanggalPemesanan, 0, restoran, items);
             user.addOrder(order);
 
+            // done
             System.out.println("Pesanan dengan ID " + orderID + " diterima!");
-
             break;
         }
     }
