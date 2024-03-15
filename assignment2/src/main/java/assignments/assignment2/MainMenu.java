@@ -256,9 +256,6 @@ public class MainMenu {
                 continue;
             }
 
-            // inisiasi restoran
-            restaurant = new Restaurant(namaRestoran);
-
             // ambil input jumlah makanan
             System.out.print("Jumlah Makanan: ");
             int jumlahMakanan = input.nextInt();
@@ -270,40 +267,21 @@ public class MainMenu {
                 inputs[i] = input.nextLine();
             }
 
-            // loop setiap input
-            boolean error = false;
-            for (String in : inputs) {
-                // mencari index dari spasi terakhir
-                int lastSpaceIndex = in.length();
-                while (--lastSpaceIndex >= 0) {
-                    if (in.charAt(lastSpaceIndex) == ' ') {
-                        break;
-                    }
-                }
-
-                // mengambil nama makanan dan harga
-                String namaMakanan = in.substring(0, lastSpaceIndex);
-                String harga = in.substring(lastSpaceIndex + 1);
-
-                // cek jika harga tidak valid
-                if (!harga.matches("^[0-9]*$")) {
-                    error = true;
-                    break;
-                }
-
-                // inisiasi menu dan add ke restoran
-                Menu menu = new Menu(namaMakanan, Integer.parseInt(harga));
-                restaurant.addMenu(menu);
-            }
+            // mengubah input strings menjadi Menu object
+            Menu[] menus = Menu.fromInputStrings(inputs);
 
             // jika error
-            if (error) {
+            if (menus == null) {
                 System.out.println("Harga menu harus bilangan bulat!\n");
                 continue;
             }
 
-            // print success message
+            // inisiasi restoran
+            restaurant = new Restaurant(namaRestoran);
+            restaurant.addMenu(menus);
             restoList.add(restaurant);
+
+            // print success message
             System.out.printf("Restaurant %s Berhasil terdaftar.", namaRestoran);
 
             break;

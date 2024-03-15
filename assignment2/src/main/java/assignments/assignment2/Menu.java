@@ -4,6 +4,37 @@ public class Menu {
 	private String namaMakanan;
 	private double harga;
 
+	public static Menu[] fromInputStrings(String[] inputs) {
+		Menu[] result = new Menu[inputs.length];
+
+		for (int i = 0; i < inputs.length; i++) {
+			String in = inputs[i];
+
+			// mencari index dari spasi terakhir
+			int lastSpaceIndex = in.length();
+			while (--lastSpaceIndex >= 0) {
+				if (in.charAt(lastSpaceIndex) == ' ') {
+					break;
+				}
+			}
+
+			// mengambil nama makanan dan harga
+			String namaMakanan = in.substring(0, lastSpaceIndex);
+			String harga = in.substring(lastSpaceIndex + 1);
+
+			// cek jika harga tidak valid
+			if (!harga.matches("^[0-9]*$")) {
+				return null;
+			}
+
+			// inisiasi menu dan add ke restoran
+			Menu menu = new Menu(namaMakanan, Integer.parseInt(harga));
+			result[i] = menu;
+		}
+
+		return result;
+	}
+
 	public Menu(String namaMakanan, double harga) {
 		this.namaMakanan = namaMakanan;
 		this.harga = harga;
@@ -11,6 +42,7 @@ public class Menu {
 
 	/**
 	 * Getter untuk instance variable namaMakanan
+	 * 
 	 * @return nama makanan
 	 */
 	public String getNamaMakanan() {
@@ -19,6 +51,7 @@ public class Menu {
 
 	/**
 	 * Getter untuk instance variable harga
+	 * 
 	 * @return harga
 	 */
 	public double getHarga() {

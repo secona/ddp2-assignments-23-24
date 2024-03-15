@@ -60,6 +60,16 @@ public class Restaurant {
 	}
 
 	/**
+	 * Menambahkan array menu ke instance variable menu
+	 * @param menus array menu yang akan ditambah
+	 */
+	public void addMenu(Menu[] menus) {
+		for (Menu menu : menus) {
+			this.addMenu(menu);
+		}
+	}
+
+	/**
 	 * Method ini digunakan untuk mendapatkan banuyaknya menu
 	 * @return panjang dari menu
 	 */
