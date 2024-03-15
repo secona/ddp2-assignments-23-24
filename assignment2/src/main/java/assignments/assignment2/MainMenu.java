@@ -181,19 +181,7 @@ public class MainMenu {
             return;
         }
 
-        System.out.println("Bill:");
-        System.out.println("Order ID: " + orderID);
-        System.out.println("Tanggal Pemesanan: " + order.getTanggalPemesanan());
-        System.out.println("Restaurant: " + order.getRestaurant().getNama());
-        System.out.println("Lokasi Pengiriman: " + user.getLokasi());
-        System.out.println("Status Pengiriman: " + (order.isOrderFinished() ? "Finished" : "Not Finished"));
-
-        System.out.println("Pesanan:");
-        for (Menu menu : order.getItems()) {
-            System.out.printf("- %s %d\n", menu.getNamaMakanan(), (int) menu.getHarga());
-        }
-
-        System.out.println("Biaya Ongkos Kirim: " + OrderGenerator.getOngkir(user.getLokasi()));
+        System.out.println(order.toString(user.getLokasi()));
     }
 
     public static void handleLihatMenu() {

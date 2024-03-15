@@ -16,4 +16,9 @@ public class Menu {
 		this.namaMakanan = namaMakanan;
 		this.harga = harga;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s %d", this.namaMakanan, (int) this.harga);
+	}
 }
