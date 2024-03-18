@@ -135,7 +135,11 @@ public class MainMenu {
             System.out.print("Tanggal Pemesanan (DD/MM/YYYY): ");
             String tanggalPemesanan = input.nextLine();
 
-            // TODO: validation
+            // jika tanggal tidak memenuhi format
+            if (!tanggalPemesanan.matches(OrderGenerator.dateRegex)) {
+                System.out.println("Masukkan tanggal sesuai format (DD/MM/YYYY)!\n");
+                continue;
+            }
 
             // ambil input jumlah pesanan
             System.out.print("Jumlah Pesanan: ");
@@ -150,9 +154,18 @@ public class MainMenu {
                 String namaMakanan = input.nextLine();
                 Menu menu = restoran.getOneMenu(namaMakanan);
 
-                if (menu != null) {
+                if (menu != null) { // jika menu ada
                     items.add(menu);
+                } else { // jika menu tidak ada
+                    items = null;
+                    break;
                 }
+            }
+
+            // jika nama menu tidak ada
+            if (items == null) {
+                System.out.println("Menu tidak tersedia.\n");
+                continue;
             }
 
             // inisiasi Order
@@ -229,7 +242,7 @@ public class MainMenu {
             // update status
             // ok = true if successful
             boolean ok = order.updateStatus(selesai);
-            
+
             if (ok) {
                 break;
             }

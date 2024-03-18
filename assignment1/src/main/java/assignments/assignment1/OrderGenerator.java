@@ -8,7 +8,7 @@ public class OrderGenerator {
     /**
      * regex ini akan match bentuk DD/MM/YYYY di mana D, M, dan Y adalah digit
      */
-    private static final String dateRegex = "\\d{2}\\/\\d{2}\\/\\d{4}";
+    public static final String dateRegex = "\\d{2}\\/\\d{2}\\/\\d{4}";
 
     /**
      * regex ini akan match dengan string minimal length 1 yang semua karakternya adalah digit
