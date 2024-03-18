@@ -152,6 +152,6 @@ public class Order {
 				"\nStatus Pengiriman: " + (this.orderFinished ? "Finished" : "Not Finished") +
 				"\nPesanan:\n" + this.getPesananString() +
 				"\nBiaya Ongkos Kirim: Rp " + this.biayaOngkosKirim +
-				"\nTotal Biaya: " + totalBiaya;
+				"\nTotal Biaya: Rp " + totalBiaya;
 	}
 }
