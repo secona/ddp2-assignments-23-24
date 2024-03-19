@@ -16,7 +16,7 @@ public class Menu {
 
 			// mencari index dari spasi terakhir
 			int lastSpaceIndex = in.length();
-			while (--lastSpaceIndex >= 0) {
+			while (--lastSpaceIndex > 0) {
 				if (in.charAt(lastSpaceIndex) == ' ') {
 					break;
 				}
@@ -27,7 +27,7 @@ public class Menu {
 			String harga = in.substring(lastSpaceIndex + 1);
 
 			// cek jika harga tidak valid
-			if (!harga.matches("^[0-9]*$")) {
+			if (!harga.matches("^[0-9]+$")) {
 				return null;
 			}
 
