@@ -10,12 +10,12 @@ public class MainMenu {
     private static ArrayList<User> userList;
 
     public static void main(String[] args) {
-        initUser();
         restoList = new ArrayList<Restaurant>();
+        initUser();
+        printHeader();
 
         boolean programRunning = true;
         while (programRunning) {
-            printHeader();
             startMenu();
             int command = input.nextInt();
             input.nextLine();
@@ -191,12 +191,13 @@ public class MainMenu {
             System.out.println("Order tidak ada.");
             return;
         }
-
+        
+        System.out.println();
         System.out.println(order.toString(user.getLokasi()));
     }
 
     public static void handleLihatMenu() {
-        System.out.println("-------------Lihat Menu---------------");
+        System.out.println("--------------Lihat Menu----------------");
 
         while (true) {
             // ambil input nama restoran
@@ -220,7 +221,7 @@ public class MainMenu {
     }
 
     public static void handleUpdateStatusPesanan() {
-        System.out.println("-------------Update Status Pesanan---------------");
+        System.out.println("--------------Update Status Pesanan----------------");
 
         while (true) {
             // ambil input orderID
@@ -296,14 +297,14 @@ public class MainMenu {
             restoList.add(restaurant);
 
             // print success message
-            System.out.printf("Restaurant %s Berhasil terdaftar.", namaRestoran);
+            System.out.printf("Restaurant %s Berhasil terdaftar.\n", namaRestoran);
 
             break;
         }
     }
 
     public static void handleHapusRestoran() {
-        System.out.println("--------------Hapus Restoran---------------");
+        System.out.println("--------------Hapus Restoran----------------");
 
         while (true) {
             // ambil input nama restoran
@@ -349,7 +350,7 @@ public class MainMenu {
     }
 
     public static void startMenu() {
-        System.out.println("Selamat datang di DepeFood!");
+        System.out.println("\nSelamat datang di DepeFood!");
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Login");
@@ -359,7 +360,7 @@ public class MainMenu {
     }
 
     public static void menuAdmin() {
-        System.out.println("\n--------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Tambah Restoran");
         System.out.println("2. Hapus Restoran");
@@ -369,7 +370,7 @@ public class MainMenu {
     }
 
     public static void menuCustomer() {
-        System.out.println("\n--------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Buat Pesanan");
         System.out.println("2. Cetak Bill");
