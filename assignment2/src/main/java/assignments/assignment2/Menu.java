@@ -4,6 +4,10 @@ public class Menu {
 	private String namaMakanan;
 	private double harga;
 
+	/**
+	 * @param inputs String array berupa input dengan format "{nama} {harga}"
+	 * @return Array menu yang masing-masing berisikan nama dan array dari input
+	 */
 	public static Menu[] fromInputStrings(String[] inputs) {
 		Menu[] result = new Menu[inputs.length];
 

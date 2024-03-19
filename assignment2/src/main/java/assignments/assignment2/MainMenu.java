@@ -10,6 +10,7 @@ public class MainMenu {
     private static ArrayList<User> userList;
 
     public static void main(String[] args) {
+        // inisiasi program
         restoList = new ArrayList<Restaurant>();
         initUser();
         printHeader();
@@ -17,28 +18,42 @@ public class MainMenu {
         boolean programRunning = true;
         while (programRunning) {
             startMenu();
+
+            // mengambil input command
             int command = input.nextInt();
             input.nextLine();
 
+            // jika login
             if (command == 1) {
                 System.out.println("\nSilakan Login:");
+
+                // ambil input nama
                 System.out.print("Nama: ");
                 String nama = input.nextLine();
+
+                // ambil input nomor telepon
                 System.out.print("Nomor Telepon: ");
                 String nomorTelepon = input.nextLine();
 
+                // coba cari user dengan credentials tersebut
                 User userLoggedIn = getUser(nama, nomorTelepon);
 
+                // jika tidak ditemukan ulang dari awal
                 if (userLoggedIn == null) {
                     System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
                     continue;
                 }
 
+                // jika ditemukan lanjut berdasarkan role
                 boolean isLoggedIn = true;
+
                 if (userLoggedIn.getRole().equals("Customer")) {
+                    // jika customer
                     System.out.println("Selamat Datang " + userLoggedIn.getName() + "!");
                     while (isLoggedIn) {
                         menuCustomer();
+
+                        // ambil input command
                         int commandCust = input.nextInt();
                         input.nextLine();
 
@@ -52,9 +67,12 @@ public class MainMenu {
                         }
                     }
                 } else {
+                    // jika admin
                     System.out.println("Selamat Datang Admin!");
                     while (isLoggedIn) {
                         menuAdmin();
+
+                        // ambil input command
                         int commandAdmin = input.nextInt();
                         input.nextLine();
 
@@ -75,6 +93,11 @@ public class MainMenu {
         System.out.println("\nTerima kasih telah menggunakan DepeFood ^___^");
     }
 
+    /**
+     * @param nama         nama dari user yang ingin dicari
+     * @param nomorTelepon nomor telepon dari user yang ingin dicari
+     * @return User dengan nama dan nomor telepon tersebut
+     */
     public static User getUser(String nama, String nomorTelepon) {
         for (User user : userList) {
             if (user.getName().equals(nama)
@@ -86,6 +109,10 @@ public class MainMenu {
         return null;
     }
 
+    /**
+     * @param orderID orderID dari order yang ingin dicari
+     * @return Order dengan orderID tersebut
+     */
     public static Order getOrder(String orderID) {
         for (User user : userList) {
             for (Order order : user.getOrderHistory()) {
@@ -98,6 +125,10 @@ public class MainMenu {
         return null;
     }
 
+    /**
+     * @param namaRestoran nama restoran yang ingin dicari
+     * @return Restoran dengan nama tersebut
+     */
     public static Restaurant getRestaurant(String namaRestoran) {
         for (Restaurant restaurant : restoList) {
             if (restaurant.isName(namaRestoran)) {
@@ -191,7 +222,7 @@ public class MainMenu {
             System.out.println("Order tidak ada.");
             return;
         }
-        
+
         System.out.println();
         System.out.println(order.toString(user.getLokasi()));
     }

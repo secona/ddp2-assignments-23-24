@@ -2,8 +2,6 @@ package assignments.assignment2;
 
 import java.util.ArrayList;
 
-import assignments.assignment1.OrderGenerator;
-
 public class Order {
 	private String orderID;
 	private String tanggalPemesanan;
