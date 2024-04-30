@@ -62,6 +62,15 @@ public class Order {
 	}
 
 	/**
+	 * Getter untuk restaurant
+	 *
+	 * @return restaurant
+	 */
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	/**
 	 * Getter untuk instance variable orderFinished
 	 * 
 	 * @return orderFinished
@@ -78,6 +87,15 @@ public class Order {
 	 */
 	public boolean isOrderID(String orderID) {
 		return this.orderID.equalsIgnoreCase(orderID);
+	}
+
+	/**
+	 * Getter untuk instance variable biayaOngkosKirim
+	 *
+	 * @return biayaOngkosKirim
+	 */
+	public int getOngkir() {
+		return this.biayaOngkosKirim;
 	}
 
 	/**

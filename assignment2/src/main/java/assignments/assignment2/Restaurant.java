@@ -5,14 +5,17 @@ import java.util.ArrayList;
 public class Restaurant {
 	private String nama;
 	private ArrayList<Menu> menu;
+	private long saldo;
 
 	public Restaurant(String nama) {
 		this.nama = nama;
 		this.menu = new ArrayList<Menu>();
+		this.saldo = 0;
 	}
 
 	/**
 	 * Getter untuk instance variable nama.
+	 * 
 	 * @return nama
 	 */
 	public String getNama() {
@@ -21,6 +24,7 @@ public class Restaurant {
 
 	/**
 	 * Membandingkan nama dari restaurant.
+	 * 
 	 * @param nama Nama yang dibandingkan
 	 * @return Menyatakan apakah namanya sama
 	 */
@@ -30,6 +34,7 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk menambahkan satu menu ke restoran
+	 * 
 	 * @param newMenu menu yang akan ditambahkan
 	 */
 	public void addMenu(Menu newMenu) {
@@ -61,6 +66,7 @@ public class Restaurant {
 
 	/**
 	 * Menambahkan array menu ke instance variable menu
+	 * 
 	 * @param menus array menu yang akan ditambah
 	 */
 	public void addMenu(Menu[] menus) {
@@ -71,6 +77,7 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk mendapatkan banuyaknya menu
+	 * 
 	 * @return panjang dari menu
 	 */
 	public int menuLength() {
@@ -78,8 +85,19 @@ public class Restaurant {
 	}
 
 	/**
+	 * Menambahkan saldo dari restaurant
+	 *
+	 * @return saldo restaurant yang baru
+	 */
+	public long addSaldo(long amount) {
+		this.saldo += amount;
+		return this.saldo;
+	}
+
+	/**
 	 * Method ini digunakan untuk mencari menu dalam restoran berdasarkan nama
 	 * makanan
+	 * 
 	 * @param namaMakanan nama dari menu makanan yang dicari
 	 * @return menu atau null
 	 */
@@ -94,6 +112,7 @@ public class Restaurant {
 
 	/**
 	 * Method ini digunakan untuk mencari menu dalam restoran berdasarkan index
+	 * 
 	 * @param index index dari menu yang dicari
 	 * @return menu atau null
 	 */
