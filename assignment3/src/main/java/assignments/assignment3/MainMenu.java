@@ -83,8 +83,7 @@ public class MainMenu {
             System.out.printf("Selamat Datang %s!", userLoggedIn.getName());
 
             UserSystemCLI system = loginManager.getSystem(userLoggedIn.getRole());
-            system.setLoggedInUser(userLoggedIn);
-            system.run();
+            system.run(userLoggedIn);
         }
     }
 

@@ -6,25 +6,23 @@ import assignments.assignment3.User;
 
 public abstract class UserSystemCLI {
     protected Scanner input;
-    private User loggedInUser;
+    private User user;
 
-    public void run() {
+    public void run(User user) {
+        this.user = user;
         this.input = new Scanner(System.in);
+
         boolean isLoggedIn = true;
         while (isLoggedIn) {
             displayMenu();
             int command = input.nextInt();
             input.nextLine();
-            isLoggedIn = handleMenu(command);
+            isLoggedIn = this.handleMenu(command);
         }
     }
 
-    public void setLoggedInUser(User user) {
-        this.loggedInUser = user;
-    }
-
-    public User getLoggedInUser() {
-        return this.loggedInUser;
+    public User getUser() {
+        return this.user;
     }
 
     abstract void displayMenu();

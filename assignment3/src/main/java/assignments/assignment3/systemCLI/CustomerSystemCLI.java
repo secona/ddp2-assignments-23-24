@@ -95,7 +95,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
             }
 
             // inisiasi Order
-            User user = super.getLoggedInUser();
+            User user = super.getUser();
             String orderID = OrderGenerator.generateOrderID(namaRestoran, tanggalPemesanan, user.getNomorTelepon());
             int ongkosKirim = Order.calculateOngkosKirim(user.getLokasi());
             Order order = new Order(orderID, tanggalPemesanan, ongkosKirim, restoran, items);
@@ -124,7 +124,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         }
 
         System.out.println();
-        System.out.println(order.toString(super.getLoggedInUser().getLokasi()));
+        System.out.println(order.toString(super.getUser().getLokasi()));
     }
 
     private void handleLihatMenu() {
@@ -173,7 +173,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         }
 
         System.out.println();
-        System.out.println(order.toString(super.getLoggedInUser().getLokasi()));
+        System.out.println(order.toString(super.getUser().getLokasi()));
 
         System.out.println();
         System.out.println("Opsi Pembayaran:");
@@ -186,7 +186,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         super.input.nextLine();
 
         // Bayar
-        super.getLoggedInUser().payOrder(metode, order);
+        super.getUser().payOrder(metode, order);
     }
 
     // private void handleUpdateStatusPesanan() {
@@ -195,7 +195,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
     // }
 
     private void handleCekSaldo() {
-        long saldo = super.getLoggedInUser().getSaldo();
+        long saldo = super.getUser().getSaldo();
         System.out.printf("Sisa saldo sebesar Rp %d\n", saldo);
     }
 }

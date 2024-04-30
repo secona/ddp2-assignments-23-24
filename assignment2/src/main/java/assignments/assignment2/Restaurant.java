@@ -119,4 +119,15 @@ public class Restaurant {
 	public Menu getOneMenu(int index) {
 		return menu.get(index);
 	}
+
+	/**
+	 * Method ini digunakan untuk print semua menu yang ada di restoran
+	 */
+	public void printMenu() {
+		System.out.println("Menu:");
+		for (int i = 0; i < this.menu.size(); i++) {
+			Menu menu = this.menu.get(i);
+			System.out.printf("%d. %s\n", i + 1, menu.toString());
+		}
+	}
 }
