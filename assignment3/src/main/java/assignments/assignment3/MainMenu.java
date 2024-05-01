@@ -83,7 +83,7 @@ public class MainMenu {
             System.out.printf("Selamat Datang %s!\n", userLoggedIn.getName());
 
             UserSystemCLI system = loginManager.getSystem(userLoggedIn.getRole());
-            system.run(userLoggedIn);
+            system.run(userLoggedIn, input);
         } else {
             System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
         }

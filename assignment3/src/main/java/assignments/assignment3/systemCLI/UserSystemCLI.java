@@ -8,15 +8,20 @@ public abstract class UserSystemCLI {
     protected Scanner input;
     protected User user;
 
-    public void run(User user) {
+    public void run(User user, Scanner scanner) {
         this.user = user;
-        this.input = new Scanner(System.in);
+        this.input = scanner;
 
+        // Main loop
         boolean isLoggedIn = true;
         while (isLoggedIn) {
             displayMenu();
+
+            // ambil command
             int command = input.nextInt();
             input.nextLine();
+
+            // menentukan apakah user meminta exit
             isLoggedIn = this.handleMenu(command);
         }
     }
