@@ -106,11 +106,9 @@ public class Order {
 	 */
 	public boolean updateStatus(boolean finished) {
 		if (orderFinished == finished) {
-			System.out.printf("Status pesanan dengan ID %v tidak berhasil diupdate!\n", orderID);
 			return false;
 		} else {
 			orderFinished = finished;
-			System.out.printf("Status pesanan dengan ID %s berhasil diupdate!\n", orderID);
 			return true;
 		}
 	}

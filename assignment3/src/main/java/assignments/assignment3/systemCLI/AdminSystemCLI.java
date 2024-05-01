@@ -18,7 +18,7 @@ public class AdminSystemCLI extends UserSystemCLI {
     }
 
     public void displayMenu() {
-        System.out.println("\n--------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Tambah Restoran");
         System.out.println("2. Hapus Restoran");

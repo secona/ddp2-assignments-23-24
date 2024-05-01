@@ -28,7 +28,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
     }
 
     public void displayMenu() {
-        System.out.println("\n--------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Buat Pesanan");
         System.out.println("2. Cetak Bill");
@@ -172,20 +172,23 @@ public class CustomerSystemCLI extends UserSystemCLI {
             return;
         }
 
+        // Print bill
         System.out.println();
         System.out.println(order.toString(super.getUser().getLokasi()));
 
+        // Print opsi
         System.out.println();
         System.out.println("Opsi Pembayaran:");
         System.out.println("1. Credit Card");
         System.out.println("2. Debit");
 
         // Ambil pilihan metode
-        System.out.print("Pilihan Metode Pembayaran:");
+        System.out.print("Pilihan Metode Pembayaran: ");
         int metode = super.input.nextInt();
         super.input.nextLine();
 
         // Bayar
+        System.out.println();
         super.getUser().payOrder(metode, order);
     }
 

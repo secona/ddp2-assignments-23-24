@@ -80,10 +80,12 @@ public class MainMenu {
 
         // Jika user ditemukan
         if (userLoggedIn != null) {
-            System.out.printf("Selamat Datang %s!", userLoggedIn.getName());
+            System.out.printf("Selamat Datang %s!\n", userLoggedIn.getName());
 
             UserSystemCLI system = loginManager.getSystem(userLoggedIn.getRole());
             system.run(userLoggedIn);
+        } else {
+            System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
         }
     }
 
@@ -110,7 +112,7 @@ public class MainMenu {
      */
     public static Restaurant findRestaurant(String nama) {
         for (Restaurant restaurant : restoList) {
-            if (restaurant.getNama().equals(nama)) {
+            if (restaurant.getNama().equalsIgnoreCase(nama)) {
                 return restaurant;
             }
         }
@@ -145,7 +147,7 @@ public class MainMenu {
     }
 
     private static void startMenu() {
-        System.out.println("Selamat datang di DepeFood!");
+        System.out.println("\nSelamat datang di DepeFood!");
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Login");

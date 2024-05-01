@@ -272,11 +272,11 @@ public class MainMenu {
             boolean selesai = status.equalsIgnoreCase("Selesai");
 
             // update status
-            // ok = true if successful
-            boolean ok = order.updateStatus(selesai);
-
-            if (ok) {
+            if (order.updateStatus(selesai)) {
+                System.out.printf("Status pesanan dengan ID %s berhasil diupdate!\n", orderID);
                 break;
+            } else {
+                System.out.printf("Status pesanan dengan ID %v tidak berhasil diupdate!\n", orderID);
             }
         }
     }
