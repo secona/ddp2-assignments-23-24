@@ -17,7 +17,7 @@ public class AdminSystemCLI extends UserSystemCLI {
         return true;
     }
 
-    public void displayMenu() {
+    protected void displayMenu() {
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Tambah Restoran");
@@ -71,7 +71,7 @@ public class AdminSystemCLI extends UserSystemCLI {
             // inisiasi restoran
             restaurant = new Restaurant(namaRestoran);
             restaurant.addMenu(menus);
-            MainMenu.restoList.add(restaurant);
+            MainMenu.addRestaurant(restaurant);
 
             // print success message
             System.out.printf("Restaurant %s Berhasil terdaftar.\n", namaRestoran);
@@ -91,7 +91,7 @@ public class AdminSystemCLI extends UserSystemCLI {
             // cari restoran dengan nama yang sesuai
             Restaurant restoran = MainMenu.findRestaurant(namaRestoran);
             if (restoran != null) {
-                MainMenu.restoList.remove(restoran);
+                MainMenu.removeRestaurant(restoran);
                 System.out.println("Restoran berhasil dihapus.");
                 return;
             }

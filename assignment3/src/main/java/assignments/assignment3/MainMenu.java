@@ -15,7 +15,7 @@ import assignments.assignment3.systemCLI.UserSystemCLI;
 public class MainMenu {
     private final Scanner input;
     private final LoginManager loginManager;
-    public static ArrayList<Restaurant> restoList = new ArrayList<>();
+    private static ArrayList<Restaurant> restoList = new ArrayList<>();
     private static ArrayList<User> userList = new ArrayList<>();
 
     public MainMenu(Scanner in, LoginManager loginManager) {
@@ -112,12 +112,26 @@ public class MainMenu {
      */
     public static Restaurant findRestaurant(String nama) {
         for (Restaurant restaurant : restoList) {
-            if (restaurant.getNama().equalsIgnoreCase(nama)) {
+            if (restaurant.isName(nama)) {
                 return restaurant;
             }
         }
 
         return null;
+    }
+
+    /**
+     * Method ini menambahkan restaurant ke list restaurant
+     */
+    public static void addRestaurant(Restaurant restaurant) {
+        MainMenu.restoList.add(restaurant);
+    }
+
+    /**
+     * Method ini me-remove restaurant dari list restaurant
+     */
+    public static void removeRestaurant(Restaurant restaurant) {
+        MainMenu.restoList.remove(restaurant);
     }
 
     /**
@@ -156,7 +170,7 @@ public class MainMenu {
         System.out.print("Pilihan menu: ");
     }
 
-    public static void initUser() {
+    private static void initUser() {
         userList = new ArrayList<User>();
 
         userList.add(

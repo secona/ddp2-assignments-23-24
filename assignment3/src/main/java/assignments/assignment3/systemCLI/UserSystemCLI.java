@@ -6,7 +6,7 @@ import assignments.assignment3.User;
 
 public abstract class UserSystemCLI {
     protected Scanner input;
-    private User user;
+    protected User user;
 
     public void run(User user) {
         this.user = user;
@@ -21,10 +21,6 @@ public abstract class UserSystemCLI {
         }
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
-    abstract void displayMenu();
-    abstract boolean handleMenu(int command);
+    protected abstract void displayMenu();
+    protected abstract boolean handleMenu(int command);
 }

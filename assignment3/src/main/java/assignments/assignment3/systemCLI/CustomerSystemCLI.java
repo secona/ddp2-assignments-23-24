@@ -12,7 +12,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
     /**
      * @return apakah user masih logged in
      */
-    public boolean handleMenu(int choice) {
+    protected boolean handleMenu(int choice) {
         switch (choice) {
             case 1 -> handleBuatPesanan();
             case 2 -> handleCetakBill();
@@ -27,7 +27,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         return true;
     }
 
-    public void displayMenu() {
+    protected void displayMenu() {
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Buat Pesanan");
@@ -95,7 +95,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
             }
 
             // inisiasi Order
-            User user = super.getUser();
+            User user = super.user;
             String orderID = OrderGenerator.generateOrderID(namaRestoran, tanggalPemesanan, user.getNomorTelepon());
             int ongkosKirim = Order.calculateOngkosKirim(user.getLokasi());
             Order order = new Order(orderID, tanggalPemesanan, ongkosKirim, restoran, items);
@@ -124,7 +124,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         }
 
         System.out.println();
-        System.out.println(order.toString(super.getUser().getLokasi()));
+        System.out.println(order.toString(super.user.getLokasi()));
     }
 
     private void handleLihatMenu() {
@@ -180,7 +180,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
 
         // Print bill
         System.out.println();
-        System.out.println(order.toString(super.getUser().getLokasi()));
+        System.out.println(order.toString(super.user.getLokasi()));
 
         // Print opsi
         System.out.println();
@@ -195,16 +195,15 @@ public class CustomerSystemCLI extends UserSystemCLI {
 
         // Bayar
         System.out.println();
-        super.getUser().payOrder(metode, order);
+        super.user.payOrder(metode, order);
     }
 
     // private void handleUpdateStatusPesanan() {
-    // // TODO: Implementasi method untuk handle ketika customer ingin update status
-    // // pesanan
+    //
     // }
 
     private void handleCekSaldo() {
-        long saldo = super.getUser().getSaldo();
+        long saldo = super.user.getSaldo();
         System.out.printf("Sisa saldo sebesar Rp %d\n", saldo);
     }
 }
