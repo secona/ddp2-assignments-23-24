@@ -76,6 +76,7 @@ public class User {
         long amount = order.calculateTotalHarga();
         if (this.payment.canPay(this.saldo, amount)) {
             order.updateStatus(true);
+            order.getRestaurant().addSaldo(order.calculateTotalHarga());
             this.saldo -= this.payment.processPayment(amount);
             return true;
         }

@@ -13,7 +13,7 @@ public class CreditCardPayment implements DepeFoodPaymentSystem {
         System.out.printf("Berhasil Membayar Bill sebesar Rp %d dengan biaya transaksi sebesar Rp %d\n",
                 amount,
                 biayaTransaksi);
-        return amount + this.countTransactionFee(amount);
+        return amount + biayaTransaksi;
     }
 
     @Override
