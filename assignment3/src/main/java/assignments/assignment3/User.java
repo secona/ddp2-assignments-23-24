@@ -73,10 +73,11 @@ public class User {
             return false;
         }
 
-        long amount = order.totalHarga() + order.getOngkir();
+        long amount = order.calculateTotalHarga();
         if (this.payment.canPay(this.saldo, amount)) {
             order.updateStatus(true);
             this.saldo -= this.payment.processPayment(amount);
+            return true;
         }
 
         return false;

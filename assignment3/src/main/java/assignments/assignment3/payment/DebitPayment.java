@@ -17,7 +17,8 @@ public class DebitPayment implements DepeFoodPaymentSystem {
         }
 
         if (amount < DebitPayment.MINIMUM_TOTAL_PRICE) {
-            System.out.printf("Jumlah pesanan < %d mohon menggunakan metode pembayaran yang lain\n", amount);
+            System.out.printf("Jumlah pesanan < %d mohon menggunakan metode pembayaran yang lain\n",
+                    DebitPayment.MINIMUM_TOTAL_PRICE);
             return false;
         }
 

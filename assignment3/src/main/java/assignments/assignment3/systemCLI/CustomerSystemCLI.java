@@ -172,6 +172,12 @@ public class CustomerSystemCLI extends UserSystemCLI {
             return;
         }
 
+        // Jika order sudah lunas
+        if (order.isOrderFinished()) {
+            System.out.println("Pesanan dengan ID ini sudah lunas!");
+            return;
+        }
+
         // Print bill
         System.out.println();
         System.out.println(order.toString(super.getUser().getLokasi()));

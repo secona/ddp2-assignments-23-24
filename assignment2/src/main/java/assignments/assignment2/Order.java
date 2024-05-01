@@ -138,7 +138,7 @@ public class Order {
 	 * 
 	 * @return Total harga dari semua item
 	 */
-	public int totalHarga() {
+	public int calculateTotalItem() {
 		int total = 0;
 
 		// loop setiap harga dan jumlahkan ke total
@@ -150,13 +150,22 @@ public class Order {
 	}
 
 	/**
+	 * Method ini menghitung keseluruhan harga yang harus dibayar
+	 *
+	 * @return Total harga dari item + ongkir
+	 */
+	public int calculateTotalHarga() {
+		return this.calculateTotalItem() + this.biayaOngkosKirim;
+	}
+
+	/**
 	 * Method ini mengubah order menjadi string dengan data lokasi user
 	 * 
 	 * @param lokasiUser lokasi dari logged in user
 	 * @return Representasi string dari order dengan lokasi user
 	 */
 	public String toString(String lokasiUser) {
-		int totalBiaya = this.biayaOngkosKirim + this.totalHarga();
+		int totalBiaya = this.calculateTotalHarga();
 
 		return "Bill:" +
 				"\nOrder ID: " + this.orderID +
