@@ -1,6 +1,5 @@
 package assignments.assignment3.systemCLI;
 
-import java.util.ArrayList;
 import assignments.assignment2.Menu;
 import assignments.assignment2.Restaurant;
 import assignments.assignment3.MainMenu;
@@ -83,22 +82,18 @@ public class AdminSystemCLI extends UserSystemCLI {
 
     private void handleHapusRestoran() {
         System.out.println("--------------Hapus Restoran----------------");
-        ArrayList<Restaurant> restoList = MainMenu.restoList;
 
         while (true) {
             // ambil input nama restoran
             System.out.print("Nama Restoran: ");
             String namaRestoran = super.input.nextLine();
 
-            // cari restoran dengan nama yang sama
-            for (int i = 0; i < restoList.size(); i++) {
-                Restaurant currentRestoran = restoList.get(i);
-                // jika ditemukan restoran dengan nama yang sama
-                if (currentRestoran.isName(namaRestoran)) {
-                    restoList.remove(i);
-                    System.out.println("Restoran berhasil dihapus.");
-                    return;
-                }
+            // cari restoran dengan nama yang sesuai
+            Restaurant restoran = MainMenu.findRestaurant(namaRestoran);
+            if (restoran != null) {
+                MainMenu.restoList.remove(restoran);
+                System.out.println("Restoran berhasil dihapus.");
+                return;
             }
 
             // jika tidak ditemukan restoran dengan nama yang sama
