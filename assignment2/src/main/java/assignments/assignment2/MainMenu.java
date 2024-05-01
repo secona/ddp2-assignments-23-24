@@ -179,19 +179,13 @@ public class MainMenu {
 
             // loop sebanyak jumlah pesanan
             System.out.println("Order:");
-            ArrayList<Menu> items = new ArrayList<Menu>();
+            String[] namaMakanan = new String[jumlahPesanan];
             for (int i = 0; i < jumlahPesanan; i++) {
-                // mencari nama makanan
-                String namaMakanan = input.nextLine();
-                Menu menu = restoran.getOneMenu(namaMakanan);
-
-                if (menu != null) { // jika menu ada
-                    items.add(menu);
-                } else { // jika menu tidak ada
-                    items = null;
-                    break;
-                }
+                namaMakanan[i] = input.nextLine();
             }
+
+            // cari nama makanan tersebut di restoran
+            Menu[] items = Menu.parseMakananRestoran(restoran, namaMakanan);
 
             // jika nama menu tidak ada
             if (items == null) {
@@ -314,7 +308,7 @@ public class MainMenu {
             }
 
             // mengubah input strings menjadi Menu object
-            Menu[] menus = Menu.fromInputStrings(inputs);
+            Menu[] menus = Menu.parseMakananHarga(inputs);
 
             // jika error
             if (menus == null) {

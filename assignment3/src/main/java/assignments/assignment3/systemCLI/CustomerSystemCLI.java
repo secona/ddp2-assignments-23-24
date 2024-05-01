@@ -9,9 +9,8 @@ import assignments.assignment3.MainMenu;
 import assignments.assignment3.User;
 
 public class CustomerSystemCLI extends UserSystemCLI {
-    /**
-     * @return apakah user masih logged in
-     */
+    /** @return apakah user masih logged in */
+    @Override
     protected boolean handleMenu(int choice) {
         switch (choice) {
             case 1 -> handleBuatPesanan();
@@ -27,6 +26,7 @@ public class CustomerSystemCLI extends UserSystemCLI {
         return true;
     }
 
+    @Override
     protected void displayMenu() {
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
@@ -74,19 +74,13 @@ public class CustomerSystemCLI extends UserSystemCLI {
 
             // loop sebanyak jumlah pesanan
             System.out.println("Order:");
-            ArrayList<Menu> items = new ArrayList<Menu>();
+            String[] namaMakanan = new String[jumlahPesanan];
             for (int i = 0; i < jumlahPesanan; i++) {
-                // mencari nama makanan
-                String namaMakanan = super.input.nextLine();
-                Menu menu = restoran.getOneMenu(namaMakanan);
-
-                if (menu != null) { // jika menu ada
-                    items.add(menu);
-                } else { // jika menu tidak ada
-                    items = null;
-                    break;
-                }
+                namaMakanan[i] = super.input.nextLine();
             }
+
+            // cari nama makanan tersebut di restoran
+            Menu[] items = Menu.parseMakananRestoran(restoran, namaMakanan);
 
             // jika nama menu tidak ada
             if (items == null) {

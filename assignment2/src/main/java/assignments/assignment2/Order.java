@@ -1,13 +1,11 @@
 package assignments.assignment2;
 
-import java.util.ArrayList;
-
 public class Order {
 	private String orderID;
 	private String tanggalPemesanan;
 	private int biayaOngkosKirim;
 	private Restaurant restaurant;
-	private ArrayList<Menu> items;
+	private Menu[] items;
 	private boolean orderFinished;
 
 	public Order(
@@ -15,7 +13,7 @@ public class Order {
 			String tanggalPemesanan,
 			int biayaOngkosKirim,
 			Restaurant restaurant,
-			ArrayList<Menu> items) {
+			Menu[] items) {
 		this.orderID = orderID;
 		this.tanggalPemesanan = tanggalPemesanan;
 		this.biayaOngkosKirim = biayaOngkosKirim;
@@ -123,12 +121,12 @@ public class Order {
 		String result = "";
 
 		// loop sampai sebelum elemen terakhir
-		for (int i = 0; i < items.size() - 1; i++) {
-			result += "- " + items.get(i).toString() + "\n";
+		for (int i = 0; i < items.length - 1; i++) {
+			result += "- " + items[i].toString() + "\n";
 		}
 
 		// menambahkan elemen terakhir
-		result += "- " + items.getLast().toString();
+		result += "- " + items[items.length - 1].toString();
 
 		return result;
 	}

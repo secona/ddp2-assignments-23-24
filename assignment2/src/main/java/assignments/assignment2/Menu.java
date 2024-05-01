@@ -8,7 +8,7 @@ public class Menu {
 	 * @param inputs String array berupa input dengan format "{nama} {harga}"
 	 * @return Array menu yang masing-masing berisikan nama dan array dari input
 	 */
-	public static Menu[] fromInputStrings(String[] inputs) {
+	public static Menu[] parseMakananHarga(String[] inputs) {
 		Menu[] result = new Menu[inputs.length];
 
 		for (int i = 0; i < inputs.length; i++) {
@@ -34,6 +34,31 @@ public class Menu {
 			// inisiasi menu dan add ke restoran
 			Menu menu = new Menu(namaMakanan, Integer.parseInt(harga));
 			result[i] = menu;
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param inputs String array berupa input dengan format "{nama}"
+	 * @param restoran instance restoran yang ingin dicari nama makanannya
+	 * @return Array Menu dengan nama makanan yang sesuai di restoran
+	 */
+	public static Menu[] parseMakananRestoran(Restaurant restoran, String[] inputs) {
+		Menu[] result = new Menu[inputs.length];
+
+		// Loop untuk setiap input
+		for (int i = 0; i < inputs.length; i++) {
+			// cari menu dengan nama yang sesuai
+			Menu menu = restoran.getOneMenu(inputs[i]);
+
+			if (menu != null) {
+				// tambahkan ke array jika ditemukan
+				result[i] = menu;
+			} else {
+				// return null jika ada yang tidak ditemukan
+				return null;
+			}
 		}
 
 		return result;

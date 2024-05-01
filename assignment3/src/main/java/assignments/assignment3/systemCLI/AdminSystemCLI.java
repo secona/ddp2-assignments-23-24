@@ -5,6 +5,8 @@ import assignments.assignment2.Restaurant;
 import assignments.assignment3.MainMenu;
 
 public class AdminSystemCLI extends UserSystemCLI {
+    /** @return apakah user masih logged in */
+    @Override
     public boolean handleMenu(int command) {
         switch (command) {
             case 1 -> handleTambahRestoran();
@@ -17,6 +19,7 @@ public class AdminSystemCLI extends UserSystemCLI {
         return true;
     }
 
+    @Override
     protected void displayMenu() {
         System.out.println("--------------------------------------------");
         System.out.println("Pilih menu:");
@@ -60,7 +63,7 @@ public class AdminSystemCLI extends UserSystemCLI {
             }
 
             // mengubah input strings menjadi Menu object
-            Menu[] menus = Menu.fromInputStrings(inputs);
+            Menu[] menus = Menu.parseMakananHarga(inputs);
 
             // jika error
             if (menus == null) {
