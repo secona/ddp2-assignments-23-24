@@ -23,11 +23,6 @@ import assignments.assignment4.page.CustomerMenu;
 import java.util.function.Consumer;
 
 public class LoginForm {
-    public static Alert USER_NOT_FOUND_ALERT = new Alert(
-            AlertType.ERROR,
-            "User not found!",
-            ButtonType.OK);
-
     private Stage stage;
     private MainApp mainApp; // MainApp instance
     private TextField nameInput;
@@ -78,7 +73,12 @@ public class LoginForm {
         User user = DepeFood.handleLogin(nama, nomorTelepon);
 
         if (user == null) {
-            USER_NOT_FOUND_ALERT.showAndWait();
+            mainApp.alertError(
+                    "Login Failed",
+                    "User not found!",
+                    String.format("User bernama \"%s\" dengan nomor telepon \"%s\" tidak ditemukan",
+                            nama,
+                            nomorTelepon));
             return;
         }
 

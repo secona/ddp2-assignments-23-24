@@ -10,6 +10,9 @@ import assignments.assignment4.page.AdminMenu;
 import assignments.assignment4.page.CustomerMenu;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -77,6 +80,21 @@ public class MainApp extends Application {
     public void logout() {
         setUser(null); // Clear the current user
         setScene(getScene("Login")); // Switch to the login scene
+    }
+
+    // Method to show an alert
+    public void showAlert(String title, String header, String content, AlertType c) {
+        Alert alert = new Alert(c);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.setResult(ButtonType.OK);
+
+        alert.showAndWait();
+    }
+
+    public void alertError(String title, String header, String content) {
+        this.showAlert(title, header, content, AlertType.ERROR);
     }
 
     public static void main(String[] args) {
