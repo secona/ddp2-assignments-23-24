@@ -1,0 +1,95 @@
+package assignments.assignment4.components.form;
+
+import assignments.assignment2.Restaurant;
+import assignments.assignment3.DepeFood;
+import assignments.assignment4.MainApp;
+import assignments.assignment4.components.HeaderText;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+
+public class AddMenuForm extends VBox {
+  private ChoiceBox<String> comboBox;
+  private TextField menuNameInput;
+  private TextField priceInput;
+
+  private void addMenu() {
+    String restoName = this.comboBox.getValue();
+
+    if (restoName == null) {
+      return;
+    }
+
+    Restaurant restoran = DepeFood.findRestaurant(restoName);
+
+    if (restoran == null) {
+      System.out.println("Restaurant not found.");
+      return;
+    }
+
+    try {
+      String menuName = menuNameInput.getText();
+      double price = Double.parseDouble(priceInput.getText());
+      DepeFood.handleTambahMenuRestoran(restoran, menuName, price);
+
+      System.out.println(restoran.getMenu());
+    } catch (Exception ex) {
+      System.out.println("Gagal menambahkan menu");
+    }
+  }
+
+  public AddMenuForm(MainApp mainApp) {
+    super();
+    ObservableList<Node> nodes = this.getChildren();
+
+    // create header
+    HeaderText header = new HeaderText("Add Menu");
+
+    nodes.add(header);
+
+    // restaurant picker
+    this.comboBox = new ChoiceBox<String>();
+    for (String name : DepeFood.getRestoNames())
+      this.comboBox.getItems().add(name);
+
+    nodes.add(this.comboBox);
+
+    // menu name text
+    Text menuNameText = new Text("Menu Item Name:");
+
+    nodes.add(menuNameText);
+
+    // menu name input
+    this.menuNameInput = new TextField();
+
+    nodes.add(this.menuNameInput);
+
+    // price text
+    Text priceText = new Text("Price:");
+
+    nodes.add(priceText);
+
+    // price input
+    this.priceInput = new TextField();
+
+    nodes.add(this.priceInput);
+
+    // add menu button
+    Button addMenuButton = new Button();
+    addMenuButton.setText("Add Menu Button");
+    addMenuButton.setOnAction(e -> addMenu());
+
+    nodes.add(addMenuButton);
+
+    // back button
+    Button backButton = new Button();
+    backButton.setText("Kembali");
+    backButton.setOnAction(e -> mainApp.previousScene());
+
+    nodes.add(backButton);
+  }
+}

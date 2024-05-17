@@ -75,7 +75,7 @@ public class DepeFood {
         }
         restoList.add(restaurant);
         System.out.print("Restaurant " + restaurant.getNama() + " Berhasil terdaftar.");
-        System.out.print(restoList.get(0).getNama());
+        System.out.println(restoList.get(0).getNama());
     }
 
     public static String getValidRestaurantName(String inputName) {
@@ -116,6 +116,16 @@ public class DepeFood {
 
     public static List<Restaurant> getRestoList() {
         return restoList;
+    }
+
+    public static String[] getRestoNames() {
+        String[] names = new String[restoList.size()];
+
+        for (int i = 0; i < restoList.size(); i++) {
+            names[i] = restoList.get(i).getNama();
+        }
+
+        return names;
     }
 
     public static Restaurant getRestaurantByName(String name) {

@@ -9,6 +9,7 @@ import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
+import assignments.assignment4.components.form.AddMenuForm;
 import assignments.assignment4.components.form.AddRestaurantForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,30 +28,35 @@ import javafx.stage.Stage;
 
 public class AdminMenu extends MemberMenu {
     private Stage stage;
-    private Scene scene;
     private User user;
+
+    private Scene baseScene;
     private Scene addRestaurantScene;
     private Scene addMenuScene;
     private Scene viewRestaurantsScene;
-    private List<Restaurant> restoList = new ArrayList<>();
+    
     private MainApp mainApp; // Reference to MainApp instance
-    private ComboBox<String> restaurantComboBox = new ComboBox<>();
-    private ListView<String> menuItemsListView = new ListView<>();
+    private String[] restoNames;
 
     public AdminMenu(Stage stage, MainApp mainApp, User user) {
         this.stage = stage;
         this.mainApp = mainApp;
         this.user = user; // Store the user
-        this.scene = createBaseMenu();
+        this.baseScene = createBaseMenu();
         this.addRestaurantScene = createAddRestaurantForm();
         this.addMenuScene = createAddMenuForm();
         this.viewRestaurantsScene = createViewRestaurantsForm();
     }
 
     @Override
+    protected void refresh() {
+        this.addMenuScene = createAddMenuForm();
+    }
+
+    @Override
     public Scene createBaseMenu() {
-        if (this.scene != null) {
-            return scene;
+        if (this.baseScene != null) {
+            return baseScene;
         }
 
         VBox menuLayout = new VBox(10);
@@ -64,14 +70,20 @@ public class AdminMenu extends MemberMenu {
         // create tambah restoran button
         Button tambahRestoButton = new Button();
         tambahRestoButton.setText("Tambah Restoran");
-        tambahRestoButton.setOnAction(e -> mainApp.setScene(this.addRestaurantScene));
+        tambahRestoButton.setOnAction(e -> {
+            this.refresh();
+            mainApp.setScene(this.addRestaurantScene);
+        });
 
         nodes.add(tambahRestoButton);
 
         // create tambah menu restoran button
         Button tambahMenuRestoButton = new Button();
-        tambahMenuRestoButton.setText("Tambah Restoran");
-        tambahMenuRestoButton.setOnAction(e -> System.out.println("Tambah Menu Restoran"));
+        tambahMenuRestoButton.setText("Tambah Menu Restoran");
+        tambahMenuRestoButton.setOnAction(e -> {
+            this.refresh();
+            mainApp.setScene(this.addMenuScene);
+        });
 
         nodes.add(tambahMenuRestoButton);
 
@@ -98,9 +110,7 @@ public class AdminMenu extends MemberMenu {
     }
 
     private Scene createAddMenuForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page tambah menu restoran
-        VBox layout = new VBox(10);
-
+        AddMenuForm layout = new AddMenuForm(mainApp);
         return new Scene(layout, 400, 600);
     }
 
