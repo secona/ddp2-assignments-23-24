@@ -110,4 +110,14 @@ public class User {
     public void addOrder(Order order) {
         orderHistory.add(order);
     }
+
+    // Method untuk DepeFood
+
+    public DepeFoodPaymentSystem getPaymentSystem() {
+        return this.payment;
+    }
+
+    public void setSaldo(long saldo) {
+        this.saldo = saldo;
+    }
 }

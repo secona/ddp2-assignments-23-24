@@ -130,4 +130,9 @@ public class Restaurant {
 			System.out.printf("%d. %s\n", i + 1, menu.toString());
 		}
 	}
+
+	// Method untuk DepeFood
+	public ArrayList<Menu> getMenu() {
+		return this.menu;
+	}
 }

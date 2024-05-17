@@ -175,4 +175,10 @@ public class Order {
 				"\nBiaya Ongkos Kirim: Rp " + this.biayaOngkosKirim +
 				"\nTotal Biaya: Rp " + totalBiaya;
 	}
+
+	// Method untuk DepeFood
+
+	public void setOrderFinished(boolean value) {
+		this.orderFinished = value;
+	}
 }

@@ -23,7 +23,9 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         window = primaryStage;
         window.setTitle("DepeFood Ordering System");
-        DepeFood.initUser(); // Initialize users
+
+        // Initialize users
+        DepeFood.initUser();
 
         // Initialize all scenes
         Scene loginScene = new LoginForm(window, this).getScene();
@@ -36,6 +38,7 @@ public class MainApp extends Application {
         window.show();
     }
 
+    // Method untuk set user
     public void setUser(User newUser) {
         user = newUser;
     }
@@ -51,7 +54,7 @@ public class MainApp extends Application {
         return allScenes.get(sceneName);
     }
 
-    public void addScene(String sceneName, Scene scene){
+    public void addScene(String sceneName, Scene scene) {
         allScenes.put(sceneName, scene);
     }
 
