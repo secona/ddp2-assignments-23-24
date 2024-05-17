@@ -2,6 +2,7 @@ package assignments.assignment4;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
@@ -14,16 +15,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-    public static Font TITLE_FONT = Font.font("Arial", FontWeight.BOLD, 30);
     public static Font BODY_FONT = Font.font("Arial", 12);
 
     private Stage window;
     private Map<String, Scene> allScenes = new HashMap<>();
-    private Scene currentScene;
+    private Stack<Scene> sceneHistory = new Stack<Scene>();
     private static User user;
 
     @Override
@@ -53,7 +52,18 @@ public class MainApp extends Application {
     // Method to set a scene
     public void setScene(Scene scene) {
         window.setScene(scene);
-        currentScene = scene;
+        sceneHistory.push(scene);
+
+        System.out.println(sceneHistory);
+    }
+
+    public void previousScene() {
+        sceneHistory.pop();
+        Scene scene = sceneHistory.peek();
+
+        window.setScene(scene);
+
+        System.out.println(sceneHistory);
     }
 
     // Method to get a scene by name
@@ -78,8 +88,13 @@ public class MainApp extends Application {
 
     // Method to logout
     public void logout() {
-        setUser(null); // Clear the current user
-        setScene(getScene("Login")); // Switch to the login scene
+        // Clear the current user
+        setUser(null);
+
+        // Go to previous until last one left
+        while (sceneHistory.size() > 1) {
+            previousScene();
+        }
     }
 
     // Method to show an alert

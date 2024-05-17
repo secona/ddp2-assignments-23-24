@@ -16,6 +16,7 @@ import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
+import assignments.assignment4.components.HeaderText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,9 +59,7 @@ public class CustomerMenu extends MemberMenu{
         ObservableList<Node> nodes = menuLayout.getChildren();
 
         // create text
-        Text title = new Text();
-        title.setText("Customer");
-        title.setFont(MainApp.TITLE_FONT);
+        Text title = new HeaderText("Customer");
 
         nodes.add(title);
 

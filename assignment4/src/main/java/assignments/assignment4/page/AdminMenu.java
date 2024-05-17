@@ -8,6 +8,8 @@ import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
+import assignments.assignment4.components.HeaderText;
+import assignments.assignment4.components.form.AddRestaurantForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -55,16 +57,14 @@ public class AdminMenu extends MemberMenu {
         ObservableList<Node> nodes = menuLayout.getChildren();
 
         // create text
-        Text title = new Text();
-        title.setText("Admin");
-        title.setFont(MainApp.TITLE_FONT);
+        HeaderText title = new HeaderText("Admin");
 
         nodes.add(title);
 
         // create tambah restoran button
         Button tambahRestoButton = new Button();
         tambahRestoButton.setText("Tambah Restoran");
-        tambahRestoButton.setOnAction(e -> System.out.println("Tambah Restoran"));
+        tambahRestoButton.setOnAction(e -> mainApp.setScene(this.addRestaurantScene));
 
         nodes.add(tambahRestoButton);
 
@@ -93,9 +93,7 @@ public class AdminMenu extends MemberMenu {
     }
 
     private Scene createAddRestaurantForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page tambah restoran
-        VBox layout = new VBox(10);
-
+        AddRestaurantForm layout = new AddRestaurantForm(mainApp);
         return new Scene(layout, 400, 600);
     }
 

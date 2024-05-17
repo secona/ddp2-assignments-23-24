@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import assignments.assignment4.MainApp;
+import assignments.assignment4.components.HeaderText;
 import assignments.assignment4.page.AdminMenu;
 import assignments.assignment4.page.CustomerMenu;
 
@@ -35,9 +36,7 @@ public class LoginForm {
 
     private Scene createLoginForm() {
         // create welcome text
-        Text welcomeText = new Text();
-        welcomeText.setText("Welcome to DepeFood");
-        welcomeText.setFont(MainApp.TITLE_FONT);
+        HeaderText welcomeText = new HeaderText("Welcome to DepeFood");
 
         // create name input
         Text nameText = new Text();
