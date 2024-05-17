@@ -61,6 +61,27 @@ public class AdminMenu extends MemberMenu {
 
         nodes.add(title);
 
+        // create tambah restoran button
+        Button tambahRestoButton = new Button();
+        tambahRestoButton.setText("Tambah Restoran");
+        tambahRestoButton.setOnAction(e -> System.out.println("Tambah Restoran"));
+
+        nodes.add(tambahRestoButton);
+
+        // create tambah menu restoran button
+        Button tambahMenuRestoButton = new Button();
+        tambahMenuRestoButton.setText("Tambah Restoran");
+        tambahMenuRestoButton.setOnAction(e -> System.out.println("Tambah Menu Restoran"));
+
+        nodes.add(tambahMenuRestoButton);
+
+        // create lihat daftar restoran button
+        Button lihatMenuButton = new Button();
+        lihatMenuButton.setText("Lihat Daftar Restoran");
+        lihatMenuButton.setOnAction(e -> System.out.println("Lihat Menu Restoran"));
+
+        nodes.add(lihatMenuButton);
+
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");

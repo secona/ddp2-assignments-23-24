@@ -64,6 +64,34 @@ public class CustomerMenu extends MemberMenu{
 
         nodes.add(title);
 
+        // create buat pesanan button
+        Button buatPesananButton = new Button();
+        buatPesananButton.setText("Buat Pesanan");
+        buatPesananButton.setOnAction(e -> System.out.println("Buat Pesanan"));
+
+        nodes.add(buatPesananButton);
+
+        // create cetak bill button
+        Button cetakBillButton = new Button();
+        cetakBillButton.setText("Cetak Bill");
+        cetakBillButton.setOnAction(e -> System.out.println("Cetak Bill"));
+
+        nodes.add(cetakBillButton);
+
+        // create bayar bill button
+        Button bayarBillButton = new Button();
+        bayarBillButton.setText("Bayar Bill");
+        bayarBillButton.setOnAction(e -> System.out.println("Bayar Bill"));
+
+        nodes.add(bayarBillButton);
+
+        // create cek saldo button
+        Button cekSaldoButton = new Button();
+        cekSaldoButton.setText("Cek Saldo");
+        cekSaldoButton.setOnAction(e -> System.out.println("Cek Saldo"));
+
+        nodes.add(cekSaldoButton);
+
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
