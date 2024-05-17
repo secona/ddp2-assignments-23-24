@@ -10,9 +10,13 @@ import assignments.assignment4.page.AdminMenu;
 import assignments.assignment4.page.CustomerMenu;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+    public static Font TITLE_FONT = Font.font("Arial", FontWeight.BOLD, 30);
+    public static Font BODY_FONT = Font.font("Arial", 12);
 
     private Stage window;
     private Map<String, Scene> allScenes = new HashMap<>();
@@ -58,6 +62,18 @@ public class MainApp extends Application {
         allScenes.put(sceneName, scene);
     }
 
+    // Method to login
+    public void login(User user) {
+        if (user.getRole().equals("Admin")) {
+            Scene scene = new AdminMenu(window, this, user).createBaseMenu();
+            setScene(scene);
+        } else {
+            Scene scene = new CustomerMenu(window, this, user).createBaseMenu();
+            setScene(scene);
+        }
+    }
+
+    // Method to logout
     public void logout() {
         setUser(null); // Clear the current user
         setScene(getScene("Login")); // Switch to the login scene

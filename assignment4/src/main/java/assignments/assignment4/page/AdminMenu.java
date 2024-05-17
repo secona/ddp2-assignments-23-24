@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
-import assignments.assignment3.Restaurant;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -18,9 +20,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AdminMenu extends MemberMenu{
+public class AdminMenu extends MemberMenu {
     private Stage stage;
     private Scene scene;
     private User user;
@@ -44,8 +47,26 @@ public class AdminMenu extends MemberMenu{
 
     @Override
     public Scene createBaseMenu() {
-        // TODO: Implementasikan method ini untuk menampilkan menu untuk Admin
+        if (this.scene != null) {
+            return scene;
+        }
+
         VBox menuLayout = new VBox(10);
+        ObservableList<Node> nodes = menuLayout.getChildren();
+
+        // create text
+        Text title = new Text();
+        title.setText("Admin");
+        title.setFont(MainApp.TITLE_FONT);
+
+        nodes.add(title);
+
+        // create logout button
+        Button logoutButton = new Button();
+        logoutButton.setText("Logout");
+        logoutButton.setOnAction(e -> mainApp.logout());
+
+        nodes.add(logoutButton);
 
         return new Scene(menuLayout, 400, 600);
     }
@@ -60,21 +81,19 @@ public class AdminMenu extends MemberMenu{
     private Scene createAddMenuForm() {
         // TODO: Implementasikan method ini untuk menampilkan page tambah menu restoran
         VBox layout = new VBox(10);
-    
+
         return new Scene(layout, 400, 600);
     }
-    
-    
+
     private Scene createViewRestaurantsForm() {
         // TODO: Implementasikan method ini untuk menampilkan page daftar restoran
         VBox layout = new VBox(10);
-    
+
         return new Scene(layout, 400, 600);
     }
-    
 
     private void handleTambahRestoran(String nama) {
-        //TODO: Implementasi validasi isian nama Restoran
+        // TODO: Implementasi validasi isian nama Restoran
         String validName = DepeFood.getValidRestaurantName(nama);
         if (true) {
 
@@ -84,11 +103,10 @@ public class AdminMenu extends MemberMenu{
     }
 
     private void handleTambahMenuRestoran(Restaurant restaurant, String itemName, double price) {
-        //TODO: Implementasi validasi isian menu Restoran
+        // TODO: Implementasi validasi isian menu Restoran
         if (true) {
 
         } else {
-
 
         }
     }

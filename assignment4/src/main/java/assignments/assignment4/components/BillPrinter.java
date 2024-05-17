@@ -11,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import assignments.assignment2.Menu;
+import assignments.assignment2.Order;
 import assignments.assignment3.DepeFood;
-import assignments.assignment3.Menu;
-import assignments.assignment3.Order;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 

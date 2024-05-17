@@ -3,14 +3,16 @@ package assignments.assignment4.page;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import assignments.assignment2.Menu;
+import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
-import assignments.assignment3.Menu;
-import assignments.assignment3.Restaurant;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
@@ -49,8 +51,25 @@ public class CustomerMenu extends MemberMenu{
 
     @Override
     public Scene createBaseMenu() {
-        // TODO: Implementasikan method ini untuk menampilkan menu untuk Customer
+        if (this.scene != null)
+            return this.scene;
+
         VBox menuLayout = new VBox(10);
+        ObservableList<Node> nodes = menuLayout.getChildren();
+
+        // create text
+        Text title = new Text();
+        title.setText("Customer");
+        title.setFont(MainApp.TITLE_FONT);
+
+        nodes.add(title);
+
+        // create logout button
+        Button logoutButton = new Button();
+        logoutButton.setText("Logout");
+        logoutButton.setOnAction(e -> mainApp.logout());
+
+        nodes.add(logoutButton);
 
         return new Scene(menuLayout, 400, 600);
     }
