@@ -43,6 +43,11 @@ public class CustomerMenu extends MemberMenu {
     }
 
     @Override
+    protected void refresh() {
+        this.cekSaldoScene = createCekSaldoScene();
+    }
+
+    @Override
     public Scene createBaseMenu() {
         if (this.scene != null)
             return this.scene;
@@ -86,6 +91,7 @@ public class CustomerMenu extends MemberMenu {
         Button cekSaldoButton = new Button();
         cekSaldoButton.setText("Cek Saldo");
         cekSaldoButton.setOnAction(e -> {
+            this.refresh();
             mainApp.setScene(this.cekSaldoScene);
         });
 
