@@ -4,6 +4,7 @@ import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -42,7 +43,7 @@ public class AddMenuForm extends VBox {
     }
   }
 
-  public AddMenuForm(MainApp mainApp) {
+  public AddMenuForm(MainApp mainApp, ObservableList<String> restoNames) {
     super();
     ObservableList<Node> nodes = this.getChildren();
 
@@ -53,8 +54,14 @@ public class AddMenuForm extends VBox {
 
     // restaurant picker
     this.comboBox = new ChoiceBox<String>();
-    for (String name : DepeFood.getRestoNames())
-      this.comboBox.getItems().add(name);
+    
+    // add listener for when restoNames changes
+    restoNames.addListener((ListChangeListener<String>) c -> {
+      // udpate comboBox to match with restoNames
+      comboBox.getItems().clear();
+      for (String name : c.getList())
+        comboBox.getItems().add(name);
+    });
 
     nodes.add(this.comboBox);
 

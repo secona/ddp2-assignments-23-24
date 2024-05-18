@@ -5,6 +5,7 @@ import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -37,7 +38,7 @@ public class ViewRestaurantsForm extends VBox {
     }
   }
 
-  public ViewRestaurantsForm(MainApp mainApp) {
+  public ViewRestaurantsForm(MainApp mainApp, ObservableList<String> restoNames) {
     ObservableList<Node> nodes = this.getChildren();
 
     // create header
@@ -47,8 +48,14 @@ public class ViewRestaurantsForm extends VBox {
 
     // restaurant picker
     this.comboBox = new ChoiceBox<String>();
-    for (String name : DepeFood.getRestoNames())
-      this.comboBox.getItems().add(name);
+    
+    // add listener for when restoNames change values
+    restoNames.addListener((ListChangeListener<String>) c -> {
+      // update comboBox items to match with the new values
+      this.comboBox.getItems().clear();
+      for (String name : c.getList())
+        this.comboBox.getItems().add(name);
+    });
 
     nodes.add(this.comboBox);
 

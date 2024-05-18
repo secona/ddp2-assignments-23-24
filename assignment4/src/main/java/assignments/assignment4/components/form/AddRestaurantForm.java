@@ -12,14 +12,17 @@ import javafx.scene.text.Text;
 
 public class AddRestaurantForm extends VBox {
   private TextField restaurantInput;
+  private ObservableList<String> restoList;
 
   private void addRestaurant() {
     String name = this.restaurantInput.getText();
     DepeFood.handleTambahRestoran(name);
+    restoList.add(name);
   }
 
-  public AddRestaurantForm(MainApp mainApp) {
+  public AddRestaurantForm(MainApp mainApp, ObservableList<String> restoList) {
     super();
+    this.restoList = restoList;
     ObservableList<Node> nodes = this.getChildren();
 
     // create text

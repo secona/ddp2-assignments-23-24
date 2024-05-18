@@ -1,10 +1,5 @@
 package assignments.assignment4.page;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import assignments.assignment2.Restaurant;
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
@@ -14,29 +9,26 @@ import assignments.assignment4.components.form.AddRestaurantForm;
 import assignments.assignment4.components.form.ViewRestaurantsForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AdminMenu extends MemberMenu {
+    @SuppressWarnings("unused")
     private Stage stage;
+    @SuppressWarnings("unused")
     private User user;
 
     private Scene baseScene;
     private Scene addRestaurantScene;
     private Scene addMenuScene;
     private Scene viewRestaurantsScene;
-    
+
     private MainApp mainApp; // Reference to MainApp instance
+
+    private ObservableList<String> restoNames = FXCollections.observableArrayList(DepeFood.getRestoNames());
 
     public AdminMenu(Stage stage, MainApp mainApp, User user) {
         this.stage = stage;
@@ -72,7 +64,6 @@ public class AdminMenu extends MemberMenu {
         Button tambahRestoButton = new Button();
         tambahRestoButton.setText("Tambah Restoran");
         tambahRestoButton.setOnAction(e -> {
-            this.refresh();
             mainApp.setScene(this.addRestaurantScene);
         });
 
@@ -82,7 +73,6 @@ public class AdminMenu extends MemberMenu {
         Button tambahMenuRestoButton = new Button();
         tambahMenuRestoButton.setText("Tambah Menu Restoran");
         tambahMenuRestoButton.setOnAction(e -> {
-            this.refresh();
             mainApp.setScene(this.addMenuScene);
         });
 
@@ -92,7 +82,6 @@ public class AdminMenu extends MemberMenu {
         Button lihatMenuButton = new Button();
         lihatMenuButton.setText("Lihat Daftar Restoran");
         lihatMenuButton.setOnAction(e -> {
-            this.refresh();
             mainApp.setScene(this.viewRestaurantsScene);
         });
 
@@ -101,7 +90,9 @@ public class AdminMenu extends MemberMenu {
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
-        logoutButton.setOnAction(e -> mainApp.logout());
+        logoutButton.setOnAction(e -> {
+            mainApp.logout();
+        });
 
         nodes.add(logoutButton);
 
@@ -109,17 +100,17 @@ public class AdminMenu extends MemberMenu {
     }
 
     private Scene createAddRestaurantForm() {
-        AddRestaurantForm layout = new AddRestaurantForm(mainApp);
+        AddRestaurantForm layout = new AddRestaurantForm(mainApp, restoNames);
         return new Scene(layout, 400, 600);
     }
 
     private Scene createAddMenuForm() {
-        AddMenuForm layout = new AddMenuForm(mainApp);
+        AddMenuForm layout = new AddMenuForm(mainApp, restoNames);
         return new Scene(layout, 400, 600);
     }
 
     private Scene createViewRestaurantsForm() {
-        ViewRestaurantsForm layout = new ViewRestaurantsForm(mainApp);
+        ViewRestaurantsForm layout = new ViewRestaurantsForm(mainApp, restoNames);
         return new Scene(layout, 400, 600);
     }
 }
