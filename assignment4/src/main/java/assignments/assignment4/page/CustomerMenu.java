@@ -19,6 +19,7 @@ import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
 import assignments.assignment4.components.HeaderText;
 import assignments.assignment4.components.form.BayarBillForm;
+import assignments.assignment4.components.form.CekSaldo;
 import assignments.assignment4.components.form.TambahPesananForm;
 
 import java.util.ArrayList;
@@ -129,9 +130,7 @@ public class CustomerMenu extends MemberMenu {
     }
 
     private Scene createCekSaldoScene() {
-        // TODO: Implementasikan method ini untuk menampilkan page cetak saldo
-        VBox menuLayout = new VBox(10);
-
+        CekSaldo menuLayout = new CekSaldo(mainApp, user);
         return new Scene(menuLayout, 400, 600);
     }
 }
