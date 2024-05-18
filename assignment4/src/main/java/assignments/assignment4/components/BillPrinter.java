@@ -28,7 +28,7 @@ public class BillPrinter {
         this.user = user;
     }
 
-    private Scene createBillPrinterForm(){
+    private Scene createBillPrinterForm() {
         //TODO: Implementasi untuk menampilkan komponen hasil cetak bill
         VBox layout = new VBox(10);
 
