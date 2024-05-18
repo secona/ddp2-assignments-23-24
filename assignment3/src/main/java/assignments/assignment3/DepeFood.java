@@ -137,24 +137,24 @@ public class DepeFood {
         return null;
     }
 
-    public static String handleBuatPesanan(String namaRestoran, String tanggalPemesanan, int jumlahPesanan,
-            List<String> listMenuPesananRequest) {
+    public static String handleBuatPesanan(
+            String namaRestoran,
+            String tanggalPemesanan,
+            int jumlahPesanan,
+            List<String> listMenuPesananRequest) throws Exception {
         System.out.println("--------------Buat Pesanan----------------");
 
         Restaurant restaurant = getRestaurantByName(namaRestoran);
         if (restaurant == null) {
-            System.out.println("Restoran tidak terdaftar pada sistem.\n");
-            return null;
+            throw new Exception("Restoran tidak terdaftar pada sistem.");
         }
 
         if (!OrderGenerator.validateDate(tanggalPemesanan)) {
-            System.out.println("Masukkan tanggal sesuai format (DD/MM/YYYY)");
-            return null;
+            throw new Exception("Masukkan tanggal sesuai format (DD/MM/YYYY).");
         }
 
         if (!validateRequestPesanan(restaurant, listMenuPesananRequest)) {
-            System.out.println("Mohon memesan menu yang tersedia di Restoran!");
-            return null;
+            throw new Exception("Mohon memesan menu yang tersedia di Restoran!.");
         }
 
         Order order = new Order(

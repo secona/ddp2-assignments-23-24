@@ -12,28 +12,40 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class TambahPesananForm extends VBox {
+  private MainApp mainApp;
   private ObservableList<String> items;
   private ObservableList<String> selectedItems;
 
   /**
    * Method for when the user press create order
    */
-  private void createOrder() {
+  private void createOrder(String namaResto, String date) {
     System.out.print("Membuat Pesanan: ");
-    System.out.println(selectedItems.toString());
+    System.out.println(this.selectedItems.toString());
+
+    try {
+      String orderId = DepeFood.handleBuatPesanan(namaResto, date, selectedItems.size(), selectedItems);
+      mainApp.showAlert("Success!", "Order dengan ID " + orderId + " berhasil ditambahkan", "", AlertType.INFORMATION);
+
+      System.out.println(DepeFood.findUserOrderById(orderId));
+    } catch (Exception ex) {
+      mainApp.alertError("Error!", "Error Creating Order", ex.getMessage());
+    }
   }
 
   /**
    * Method for when the user changes restaurant
+   * 
    * @param namaResto the restaurant name
    */
   private void changeMenu(String namaResto) {
     this.items.clear();
-    
+
     Restaurant resto = DepeFood.getRestaurantByName(namaResto);
 
     for (Menu menu : resto.getMenu()) {
@@ -47,6 +59,7 @@ public class TambahPesananForm extends VBox {
   public TambahPesananForm(MainApp mainApp) {
     super(10);
     ObservableList<Node> nodes = this.getChildren();
+    this.mainApp = mainApp;
 
     // create header
     HeaderText header = new HeaderText("Order Food");
@@ -74,7 +87,7 @@ public class TambahPesananForm extends VBox {
 
     // submit button
     Button submitButton = new Button("Buat Pesanan");
-    submitButton.setOnAction(e -> createOrder());
+    submitButton.setOnAction(e -> createOrder(restoPicker.getValue(), dateInput.getText()));
     nodes.add(submitButton);
 
     // back button

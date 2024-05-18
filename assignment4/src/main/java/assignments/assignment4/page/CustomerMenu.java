@@ -1,19 +1,12 @@
 package assignments.assignment4.page;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import assignments.assignment2.Menu;
-import assignments.assignment2.Restaurant;
-import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
@@ -21,11 +14,6 @@ import assignments.assignment4.components.HeaderText;
 import assignments.assignment4.components.form.BayarBillForm;
 import assignments.assignment4.components.form.CekSaldo;
 import assignments.assignment4.components.form.TambahPesananForm;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CustomerMenu extends MemberMenu {
     private Stage stage;
