@@ -18,6 +18,7 @@ import assignments.assignment3.User;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.BillPrinter;
 import assignments.assignment4.components.HeaderText;
+import assignments.assignment4.components.form.BayarBillForm;
 import assignments.assignment4.components.form.TambahPesananForm;
 
 import java.util.ArrayList;
@@ -123,9 +124,7 @@ public class CustomerMenu extends MemberMenu {
     }
 
     private Scene createBayarBillForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page bayar bill
-        VBox menuLayout = new VBox(10);
-
+        BayarBillForm menuLayout = new BayarBillForm(mainApp);
         return new Scene(menuLayout, 400, 600);
     }
 
@@ -134,23 +133,5 @@ public class CustomerMenu extends MemberMenu {
         VBox menuLayout = new VBox(10);
 
         return new Scene(menuLayout, 400, 600);
-    }
-
-    private void handleBuatPesanan(String namaRestoran, String tanggalPemesanan, List<String> menuItems) {
-        // TODO: Implementasi validasi isian pesanan
-        try {
-
-        } catch (Exception e) {
-
-        }
-    }
-
-    private void handleBayarBill(String orderID, int pilihanPembayaran) {
-        // TODO: Implementasi validasi pembayaran
-        try {
-
-        } catch (Exception e) {
-
-        }
     }
 }
