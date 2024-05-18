@@ -11,6 +11,7 @@ import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
 import assignments.assignment4.components.form.AddMenuForm;
 import assignments.assignment4.components.form.AddRestaurantForm;
+import assignments.assignment4.components.form.ViewRestaurantsForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -36,7 +37,6 @@ public class AdminMenu extends MemberMenu {
     private Scene viewRestaurantsScene;
     
     private MainApp mainApp; // Reference to MainApp instance
-    private String[] restoNames;
 
     public AdminMenu(Stage stage, MainApp mainApp, User user) {
         this.stage = stage;
@@ -51,6 +51,7 @@ public class AdminMenu extends MemberMenu {
     @Override
     protected void refresh() {
         this.addMenuScene = createAddMenuForm();
+        this.viewRestaurantsScene = createViewRestaurantsForm();
     }
 
     @Override
@@ -90,7 +91,10 @@ public class AdminMenu extends MemberMenu {
         // create lihat daftar restoran button
         Button lihatMenuButton = new Button();
         lihatMenuButton.setText("Lihat Daftar Restoran");
-        lihatMenuButton.setOnAction(e -> System.out.println("Lihat Menu Restoran"));
+        lihatMenuButton.setOnAction(e -> {
+            this.refresh();
+            mainApp.setScene(this.viewRestaurantsScene);
+        });
 
         nodes.add(lihatMenuButton);
 
@@ -115,28 +119,7 @@ public class AdminMenu extends MemberMenu {
     }
 
     private Scene createViewRestaurantsForm() {
-        // TODO: Implementasikan method ini untuk menampilkan page daftar restoran
-        VBox layout = new VBox(10);
-
+        ViewRestaurantsForm layout = new ViewRestaurantsForm(mainApp);
         return new Scene(layout, 400, 600);
-    }
-
-    private void handleTambahRestoran(String nama) {
-        // TODO: Implementasi validasi isian nama Restoran
-        String validName = DepeFood.getValidRestaurantName(nama);
-        if (true) {
-
-        } else {
-
-        }
-    }
-
-    private void handleTambahMenuRestoran(Restaurant restaurant, String itemName, double price) {
-        // TODO: Implementasi validasi isian menu Restoran
-        if (true) {
-
-        } else {
-
-        }
     }
 }
