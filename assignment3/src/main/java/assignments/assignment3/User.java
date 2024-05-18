@@ -10,6 +10,7 @@ import assignments.assignment3.payment.DepeFoodPaymentSystem;
 public class User {
     private String name;
     private String nomorTelepon;
+    @SuppressWarnings("unused")
     private String email;
     private String lokasi;
     private String role;
@@ -77,7 +78,11 @@ public class User {
         if (this.payment.canPay(this.saldo, amount)) {
             order.updateStatus(true);
             order.getRestaurant().addSaldo(order.calculateTotalHarga());
-            this.saldo -= this.payment.processPayment(amount);
+            try {
+                this.saldo -= this.payment.processPayment(this.saldo, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -93,6 +98,11 @@ public class User {
     public boolean hasPaymentMethod(int metode) {
         return this.payment instanceof CreditCardPayment && metode == 1 ||
                 this.payment instanceof DebitPayment && metode == 2;
+    }
+
+    public boolean hasPaymentMethod(String metode) {
+        return this.payment instanceof CreditCardPayment && metode.equals("Credit Card") ||
+                this.payment instanceof DebitPayment && metode.equals("Debit");
     }
 
     /**

@@ -34,7 +34,7 @@ public class TambahPesananForm extends VBox {
 
       System.out.println(DepeFood.findUserOrderById(orderId));
     } catch (Exception ex) {
-      mainApp.alertError("Error!", "Error Creating Order", ex.getMessage());
+      mainApp.alertError("Error!", "Error Membuat Order", ex.getMessage());
     }
   }
 

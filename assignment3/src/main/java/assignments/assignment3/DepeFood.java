@@ -1,7 +1,5 @@
 package assignments.assignment3;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -169,60 +167,43 @@ public class DepeFood {
         return order.getOrderID();
     }
 
-    public static void handleBayarBill(String orderId, String paymentOption) {
-        while (true) {
-            Order order = getOrderOrNull(orderId);
+    public static String handleBayarBill(String orderId, String paymentOption) throws Exception {
+        Order order = getOrderOrNull(orderId);
 
-            if (order == null) {
-                System.out.println("Order ID tidak dapat ditemukan.\n");
-                continue;
-            }
+        if (order == null) {
+            throw new Exception("Order ID tidak dapat ditemukan.");
+        }
 
-            if (order.isOrderFinished()) {
-                System.out.println("Pesanan dengan ID ini sudah lunas!\n");
-                return;
-            }
+        System.out.println(order.toString());
 
-            System.out.print("Pilihan Metode Pembayaran: ");
+        if (order.isOrderFinished()) {
+            throw new Exception("Pesanan dengan ID ini sudah lunas!");
+        }
 
-            if (!paymentOption.equals("Credit Card") && !paymentOption.equals("Debit")) {
-                System.out.println("Pilihan tidak valid, silakan coba kembali\n");
-                continue;
-            }
+        if (!paymentOption.equals("Credit Card") && !paymentOption.equals("Debit")) {
+            throw new Exception("Pilihan tidak valid, silakan coba kembali.");
+        }
 
-            DepeFoodPaymentSystem paymentSystem = userLoggedIn.getPaymentSystem();
+        if (!userLoggedIn.hasPaymentMethod(paymentOption)) {
+            throw new Exception("User belum memiliki metode pembayaran ini!");
+        }
 
-            boolean isCreditCard = paymentSystem instanceof CreditCardPayment;
+        DepeFoodPaymentSystem paymentSystem = userLoggedIn.getPaymentSystem();
 
-            if ((isCreditCard && paymentOption.equals("Debit"))
-                    || (!isCreditCard && paymentOption.equals("Credit Card"))) {
-                System.out.println("User belum memiliki metode pembayaran ini!\n");
-                continue;
-            }
+        long amountToPay = paymentSystem.processPayment(userLoggedIn.getSaldo(), order.calculateTotalHarga());
 
-            boolean canPay = paymentSystem.canPay(
-                    userLoggedIn.getSaldo(),
-                    order.calculateTotalHarga());
+        long saldoLeft = userLoggedIn.getSaldo() - amountToPay;
 
-            if (!canPay) {
-                continue;
-            }
+        userLoggedIn.setSaldo(saldoLeft);
+        handleUpdateStatusPesanan(order);
 
-            long amountToPay = paymentSystem.processPayment(order.calculateTotalHarga());
-
-            long saldoLeft = userLoggedIn.getSaldo() - amountToPay;
-
-            userLoggedIn.setSaldo(saldoLeft);
-            handleUpdateStatusPesanan(order);
-
-            DecimalFormat decimalFormat = new DecimalFormat();
-            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-            symbols.setGroupingSeparator('.');
-            decimalFormat.setDecimalFormatSymbols(symbols);
-
-            System.out.printf("Berhasil Membayar Bill sebesar Rp %s", decimalFormat.format(amountToPay));
-
-            return;
+        if (paymentSystem instanceof CreditCardPayment) {
+            return String.format("Berhasil Membayar Bill sebesar Rp %d dengan biaya transaksi sebesar Rp %d",
+                    amountToPay,
+                    ((CreditCardPayment) paymentSystem).countTransactionFee(amountToPay));
+        } else {
+            return String.format("Berhasil Membayar Bill sebesar Rp %d",
+                    amountToPay);
         }
     }
 

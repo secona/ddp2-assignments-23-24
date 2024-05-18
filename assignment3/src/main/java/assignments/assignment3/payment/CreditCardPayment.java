@@ -8,7 +8,11 @@ public class CreditCardPayment implements DepeFoodPaymentSystem {
     }
 
     @Override
-    public long processPayment(long amount) {
+    public long processPayment(long saldo, long amount) throws Exception {
+        if (saldo < amount) {
+            throw new Exception("Saldo tidak mencukupi mohon menggunakan metode pembayaran yang lain");
+        }
+
         long biayaTransaksi = this.countTransactionFee(amount);
         System.out.printf("Berhasil Membayar Bill sebesar Rp %d dengan biaya transaksi sebesar Rp %d\n",
                 amount,

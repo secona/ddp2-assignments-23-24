@@ -8,15 +8,25 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 public class BayarBillForm extends VBox {
+  private MainApp mainApp;
+
   private void bayar(String orderId, String opsiPembayaran) {
     System.out.println("Membayar " + orderId + " dengan " + opsiPembayaran);
+    try {
+      String message = DepeFood.handleBayarBill(orderId, opsiPembayaran);
+      mainApp.showAlert("Success!", message, "", AlertType.INFORMATION);
+    } catch (Exception ex) {
+      mainApp.alertError("Error!", "Error membayar bill", ex.getMessage());
+    }
   }
 
   public BayarBillForm(MainApp mainApp) {
     super(10);
+    this.mainApp = mainApp;
     ObservableList<Node> nodes = this.getChildren();
 
     // create input for orderid
