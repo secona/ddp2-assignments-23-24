@@ -16,6 +16,7 @@ import assignments.assignment4.components.form.CekSaldo;
 import assignments.assignment4.components.form.TambahPesananForm;
 
 public class CustomerMenu extends MemberMenu {
+    @SuppressWarnings("unused")
     private Stage stage;
 
     private Scene scene;
@@ -27,7 +28,6 @@ public class CustomerMenu extends MemberMenu {
     private MainApp mainApp;
     private User user;
 
-    private ComboBox<String> restaurantComboBox = new ComboBox<>();
     private BillPrinter billPrinter; // Instance of BillPrinter
 
     public CustomerMenu(Stage stage, MainApp mainApp, User user) {
@@ -113,9 +113,7 @@ public class CustomerMenu extends MemberMenu {
     }
 
     private Scene createBillPrinter() {
-        // TODO: Implementasikan method ini untuk menampilkan page cetak bill
-
-        return null;
+        return this.billPrinter.getScene();
     }
 
     private Scene createBayarBillForm() {

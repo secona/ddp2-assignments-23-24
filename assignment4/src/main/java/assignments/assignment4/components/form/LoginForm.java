@@ -2,28 +2,17 @@ package assignments.assignment4.components.form;
 
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
-import assignments.assignment4.page.AdminMenu;
-import assignments.assignment4.page.CustomerMenu;
-
-import java.util.function.Consumer;
 
 public class LoginForm {
+    @SuppressWarnings("unused")
     private Stage stage;
     private MainApp mainApp; // MainApp instance
     private TextField nameInput;
