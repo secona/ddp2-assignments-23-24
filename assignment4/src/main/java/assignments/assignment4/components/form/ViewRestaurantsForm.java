@@ -15,10 +15,10 @@ import javafx.scene.layout.VBox;
 
 public class ViewRestaurantsForm extends VBox {
   private ListView<String> listMenu;
-  private ChoiceBox<String> comboBox;
+  private ChoiceBox<String> restoPicker;
 
   private void view() {
-    String restoName = this.comboBox.getValue();
+    String restoName = this.restoPicker.getValue();
 
     if (restoName == null) {
       System.out.println("Please input a restaurant name");
@@ -47,17 +47,16 @@ public class ViewRestaurantsForm extends VBox {
     nodes.add(header);
 
     // restaurant picker
-    this.comboBox = new ChoiceBox<String>();
+    this.restoPicker = new ChoiceBox<String>();
+    this.restoPicker.getItems().setAll(restoNames);
     
-    // add listener for when restoNames change values
+    // add listener for when restoNames changes
     restoNames.addListener((ListChangeListener<String>) c -> {
       // update comboBox items to match with the new values
-      this.comboBox.getItems().clear();
-      for (String name : c.getList())
-        this.comboBox.getItems().add(name);
+      this.restoPicker.getItems().setAll(c.getList());
     });
 
-    nodes.add(this.comboBox);
+    nodes.add(this.restoPicker);
 
     // view button
     Button viewButton = new Button("Search");

@@ -14,12 +14,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class AddMenuForm extends VBox {
-  private ChoiceBox<String> comboBox;
+  private ChoiceBox<String> restoPicker;
   private TextField menuNameInput;
   private TextField priceInput;
 
   private void addMenu() {
-    String restoName = this.comboBox.getValue();
+    String restoName = this.restoPicker.getValue();
 
     if (restoName == null) {
       return;
@@ -53,17 +53,16 @@ public class AddMenuForm extends VBox {
     nodes.add(header);
 
     // restaurant picker
-    this.comboBox = new ChoiceBox<String>();
+    this.restoPicker = new ChoiceBox<String>();
+    this.restoPicker.getItems().setAll(restoNames);
     
     // add listener for when restoNames changes
     restoNames.addListener((ListChangeListener<String>) c -> {
-      // udpate comboBox to match with restoNames
-      comboBox.getItems().clear();
-      for (String name : c.getList())
-        comboBox.getItems().add(name);
+      // update comboBox items to match with the new values
+      this.restoPicker.getItems().setAll(c.getList());
     });
 
-    nodes.add(this.comboBox);
+    nodes.add(this.restoPicker);
 
     // menu name text
     Text menuNameText = new Text("Menu Item Name:");

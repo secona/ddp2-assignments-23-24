@@ -67,10 +67,6 @@ public class DepeFood {
 
     public static void handleTambahRestoran(String nama) {
         Restaurant restaurant = new Restaurant(nama);
-        while (restaurant == null) {
-            String namaRestaurant = getValidRestaurantName(nama);
-            restaurant = new Restaurant(namaRestaurant);
-        }
         restoList.add(restaurant);
         System.out.print("Restaurant " + restaurant.getNama() + " Berhasil terdaftar.");
         System.out.println(restoList.get(0).getNama());

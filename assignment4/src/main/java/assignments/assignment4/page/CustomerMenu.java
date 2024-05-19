@@ -19,6 +19,7 @@ public class CustomerMenu extends MemberMenu {
     @SuppressWarnings("unused")
     private Stage stage;
 
+    @SuppressWarnings("unused")
     private Scene scene;
     private Scene addOrderScene;
     private Scene printBillScene;
@@ -49,9 +50,6 @@ public class CustomerMenu extends MemberMenu {
 
     @Override
     public Scene createBaseMenu() {
-        if (this.scene != null)
-            return this.scene;
-
         VBox menuLayout = new VBox(10);
         ObservableList<Node> nodes = menuLayout.getChildren();
 

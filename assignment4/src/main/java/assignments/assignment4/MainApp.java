@@ -23,6 +23,7 @@ public class MainApp extends Application {
     private Stage window;
     private Map<String, Scene> allScenes = new HashMap<>();
     private Stack<Scene> sceneHistory = new Stack<Scene>();
+    @SuppressWarnings("unused")
     private static User user;
 
     @Override

@@ -21,6 +21,7 @@ public class AdminMenu extends MemberMenu {
     @SuppressWarnings("unused")
     private User user;
 
+    @SuppressWarnings("unused")
     private Scene baseScene;
     private Scene addRestaurantScene;
     private Scene addMenuScene;
@@ -28,12 +29,16 @@ public class AdminMenu extends MemberMenu {
 
     private MainApp mainApp; // Reference to MainApp instance
 
-    private ObservableList<String> restoNames = FXCollections.observableArrayList(DepeFood.getRestoNames());
+    private ObservableList<String> restoNames;
 
     public AdminMenu(Stage stage, MainApp mainApp, User user) {
+        this.restoNames = FXCollections.observableArrayList(DepeFood.getRestoNames());
+        System.out.println(this.restoNames);
+
         this.stage = stage;
         this.mainApp = mainApp;
         this.user = user; // Store the user
+
         this.baseScene = createBaseMenu();
         this.addRestaurantScene = createAddRestaurantForm();
         this.addMenuScene = createAddMenuForm();
@@ -48,52 +53,35 @@ public class AdminMenu extends MemberMenu {
 
     @Override
     public Scene createBaseMenu() {
-        if (this.baseScene != null) {
-            return baseScene;
-        }
-
         VBox menuLayout = new VBox(10);
         ObservableList<Node> nodes = menuLayout.getChildren();
 
         // create text
         HeaderText title = new HeaderText("Admin");
-
         nodes.add(title);
 
         // create tambah restoran button
         Button tambahRestoButton = new Button();
         tambahRestoButton.setText("Tambah Restoran");
-        tambahRestoButton.setOnAction(e -> {
-            mainApp.setScene(this.addRestaurantScene);
-        });
-
+        tambahRestoButton.setOnAction(e -> mainApp.setScene(this.addRestaurantScene));
         nodes.add(tambahRestoButton);
 
         // create tambah menu restoran button
         Button tambahMenuRestoButton = new Button();
         tambahMenuRestoButton.setText("Tambah Menu Restoran");
-        tambahMenuRestoButton.setOnAction(e -> {
-            mainApp.setScene(this.addMenuScene);
-        });
-
+        tambahMenuRestoButton.setOnAction(e -> mainApp.setScene(this.addMenuScene));
         nodes.add(tambahMenuRestoButton);
 
         // create lihat daftar restoran button
         Button lihatMenuButton = new Button();
         lihatMenuButton.setText("Lihat Daftar Restoran");
-        lihatMenuButton.setOnAction(e -> {
-            mainApp.setScene(this.viewRestaurantsScene);
-        });
-
+        lihatMenuButton.setOnAction(e -> mainApp.setScene(this.viewRestaurantsScene));
         nodes.add(lihatMenuButton);
 
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
-        logoutButton.setOnAction(e -> {
-            mainApp.logout();
-        });
-
+        logoutButton.setOnAction(e -> mainApp.logout());
         nodes.add(logoutButton);
 
         return new Scene(menuLayout, 400, 600);
