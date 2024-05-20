@@ -2,10 +2,15 @@ package assignments.assignment4.components.form;
 
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.User;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import assignments.assignment4.MainApp;
@@ -24,6 +29,10 @@ public class LoginForm {
     }
 
     private Scene createLoginForm() {
+        VBox layout = new VBox(30);
+        layout.setPadding(new Insets(30, 30, 100, 30));
+        layout.setAlignment(Pos.CENTER);
+
         // create welcome text
         HeaderText welcomeText = new HeaderText("Welcome to DepeFood");
 
@@ -33,26 +42,30 @@ public class LoginForm {
 
         this.nameInput = new TextField();
 
+        VBox name = new VBox(nameText, this.nameInput);
+
         // create phone number input
         Text phoneNumberText = new Text();
         phoneNumberText.setText("Phone Number: ");
 
         this.phoneNumberInput = new TextField();
 
+        VBox phoneNumber = new VBox(phoneNumberText, this.phoneNumberInput);
+
+        // create a VBox for input
+        VBox input = new VBox(5, name, phoneNumber);
+
         // create login button
         Button loginButton = new Button();
         loginButton.setText("Login");
+        loginButton.setPrefWidth(Double.MAX_VALUE);
         loginButton.setOnAction(e -> handleLogin());
 
-        // create grid
-        GridPane grid = new GridPane();
-        grid.add(welcomeText, 0, 0, 2, 1);
-        grid.addRow(1, nameText, nameInput);
-        grid.addRow(2, phoneNumberText, phoneNumberInput);
-        grid.add(loginButton, 1, 3, 1, 1);
+        // add elements
+        layout.getChildren().addAll(welcomeText, input, loginButton);
 
         // create scene
-        return new Scene(grid, 400, 600);
+        return new Scene(layout, 400, 600);
     }
 
     private void handleLogin() {

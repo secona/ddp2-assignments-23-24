@@ -65,34 +65,32 @@ public class DepeFood {
         return user;
     }
 
-    public static void handleTambahRestoran(String nama) {
+    public static String handleTambahRestoran(String nama) throws Exception {
+        testValidRestaurantName(nama);
+
         Restaurant restaurant = new Restaurant(nama);
         restoList.add(restaurant);
-        System.out.print("Restaurant " + restaurant.getNama() + " Berhasil terdaftar.");
-        System.out.println(restoList.get(0).getNama());
+
+        return "Restaurant " + restaurant.getNama() + " Berhasil terdaftar.";
     }
 
-    public static String getValidRestaurantName(String inputName) {
-        String name = "";
-        boolean isRestaurantNameValid = false;
-
-        while (!isRestaurantNameValid) {
+    public static void testValidRestaurantName(String inputName) throws Exception {
+        while (true) {
             System.out.print("Nama: ");
             boolean isRestaurantExist = restoList.stream()
                     .anyMatch(restoran -> restoran.getNama().toLowerCase().equals(inputName.toLowerCase()));
             boolean isRestaurantNameLengthValid = inputName.length() >= 4;
 
             if (isRestaurantExist) {
-                return String.format(
-                        "Restoran dengan nama %s sudah pernah terdaftar. Mohon masukkan nama yang berbeda!", inputName);
+                throw new Exception(String.format(
+                        "Restoran dengan nama %s sudah pernah terdaftar. Mohon masukkan nama yang berbeda!",
+                        inputName));
             } else if (!isRestaurantNameLengthValid) {
-                return "Nama Restoran tidak valid! Minimal 4 karakter diperlukan.";
+                throw new Exception("Nama Restoran tidak valid! Minimal 4 karakter diperlukan.");
             } else {
-                name = inputName;
-                isRestaurantNameValid = true;
+                break;
             }
         }
-        return name;
     }
 
     public static Restaurant findRestaurant(String nama) {

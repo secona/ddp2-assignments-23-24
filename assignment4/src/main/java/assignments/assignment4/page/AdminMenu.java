@@ -9,6 +9,8 @@ import assignments.assignment4.components.form.AddRestaurantForm;
 import assignments.assignment4.components.form.ViewRestaurantsForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -54,6 +56,8 @@ public class AdminMenu extends MemberMenu {
     @Override
     public Scene createBaseMenu() {
         VBox menuLayout = new VBox(10);
+        menuLayout.setAlignment(Pos.CENTER);
+        menuLayout.setPadding(new Insets(30, 30, 100, 30));
         ObservableList<Node> nodes = menuLayout.getChildren();
 
         // create text
@@ -64,24 +68,28 @@ public class AdminMenu extends MemberMenu {
         Button tambahRestoButton = new Button();
         tambahRestoButton.setText("Tambah Restoran");
         tambahRestoButton.setOnAction(e -> mainApp.setScene(this.addRestaurantScene));
+        tambahRestoButton.setPrefWidth(Double.MAX_VALUE);
         nodes.add(tambahRestoButton);
 
         // create tambah menu restoran button
         Button tambahMenuRestoButton = new Button();
         tambahMenuRestoButton.setText("Tambah Menu Restoran");
         tambahMenuRestoButton.setOnAction(e -> mainApp.setScene(this.addMenuScene));
+        tambahMenuRestoButton.setPrefWidth(Double.MAX_VALUE);
         nodes.add(tambahMenuRestoButton);
 
         // create lihat daftar restoran button
         Button lihatMenuButton = new Button();
         lihatMenuButton.setText("Lihat Daftar Restoran");
         lihatMenuButton.setOnAction(e -> mainApp.setScene(this.viewRestaurantsScene));
+        lihatMenuButton.setPrefWidth(Double.MAX_VALUE);
         nodes.add(lihatMenuButton);
 
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
         logoutButton.setOnAction(e -> mainApp.logout());
+        logoutButton.setPrefWidth(Double.MAX_VALUE);
         nodes.add(logoutButton);
 
         return new Scene(menuLayout, 400, 600);
