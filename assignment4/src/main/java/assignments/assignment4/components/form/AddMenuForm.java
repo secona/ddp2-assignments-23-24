@@ -29,6 +29,7 @@ public class AddMenuForm extends VBox {
     // mengambil nama restoran
     String restoName = this.restoPicker.getValue();
     if (restoName == null) {
+      this.mainApp.alertError("Error!", "Mohon pilih sebuah restoran!", "");
       return;
     }
 

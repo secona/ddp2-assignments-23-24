@@ -197,7 +197,8 @@ public class DepeFood {
 
         DepeFoodPaymentSystem paymentSystem = userLoggedIn.getPaymentSystem();
 
-        long amountToPay = paymentSystem.processPayment(userLoggedIn.getSaldo(), order.calculateTotalHarga());
+        long totalHarga = order.calculateTotalHarga();
+        long amountToPay = paymentSystem.processPayment(userLoggedIn.getSaldo(), totalHarga);
 
         long saldoLeft = userLoggedIn.getSaldo() - amountToPay;
 
@@ -206,8 +207,8 @@ public class DepeFood {
 
         if (paymentSystem instanceof CreditCardPayment) {
             return String.format("Berhasil Membayar Bill sebesar Rp %d dengan biaya transaksi sebesar Rp %d",
-                    amountToPay,
-                    ((CreditCardPayment) paymentSystem).countTransactionFee(amountToPay));
+                    totalHarga,
+                    ((CreditCardPayment) paymentSystem).countTransactionFee(totalHarga));
         } else {
             return String.format("Berhasil Membayar Bill sebesar Rp %d",
                     amountToPay);
