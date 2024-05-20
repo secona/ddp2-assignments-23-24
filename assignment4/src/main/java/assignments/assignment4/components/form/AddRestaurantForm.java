@@ -18,27 +18,46 @@ public class AddRestaurantForm extends VBox {
   private ObservableList<String> restoList;
   private MainApp mainApp;
 
+  /**
+   * Method ini digunakan untuk menambahkan restoran baru
+   */
   private void addRestaurant() {
     try {
+      // mencoba menambahkan restoran
       String name = this.restaurantInput.getText();
       String message = DepeFood.handleTambahRestoran(name);
       this.restoList.add(name);
 
+      // show success jika berhasil
       this.mainApp.showAlert("Success!", message, "", AlertType.INFORMATION);
-      this.mainApp.previousScene();
+
+      // otomatis kembali ke main menu
+      this.kembali();
     } catch (Exception ex) {
       this.mainApp.alertError("Error!", ex.getMessage(), "");
     }
   }
 
-  public AddRestaurantForm(MainApp mainApp, ObservableList<String> restoList) {
-    super(10);
-    this.restoList = restoList;
-    this.mainApp = mainApp;
-    ObservableList<Node> nodes = this.getChildren();
+  /**
+   * Method ini digunakan untuk kembali ke menu admin
+   */
+  private void kembali() {
+    // clear inputs
+    this.restaurantInput.clear();
 
+    // kembali ke main menu
+    this.mainApp.previousScene();
+  }
+
+  public AddRestaurantForm(MainApp mainApp, ObservableList<String> restoList) {
+    // setting awal VBox
+    super(10);
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(30, 30, 100, 30));
+    ObservableList<Node> nodes = this.getChildren();
+
+    this.restoList = restoList;
+    this.mainApp = mainApp;
 
     // create text
     HeaderText title = new HeaderText("New Restaurant");

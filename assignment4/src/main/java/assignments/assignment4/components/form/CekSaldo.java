@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 
 public class CekSaldo extends VBox {
   public CekSaldo(MainApp mainApp, User user) {
+    // setting VBox
     super(10);
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(30, 30, 100, 30));
@@ -37,6 +38,7 @@ public class CekSaldo extends VBox {
     nodes.add(backButton);
   }
 
+  /** Class ini digunakan sebagai extension dari Text */
   class DetailField extends Text {
     public static Font FONT = Font.font("Arial", FontWeight.BOLD, 12);
 

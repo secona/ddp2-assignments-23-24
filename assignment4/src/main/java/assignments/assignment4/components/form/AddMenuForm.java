@@ -22,25 +22,32 @@ public class AddMenuForm extends VBox {
   private TextField priceInput;
   private MainApp mainApp;
 
+  /**
+   * Method ini digunakan untuk menambahkan menu ke restoran
+   */
   private void addMenu() {
+    // mengambil nama restoran
     String restoName = this.restoPicker.getValue();
-
     if (restoName == null) {
       return;
     }
 
+    // mencari restoran dengan nama tsb
     Restaurant restoran = DepeFood.findRestaurant(restoName);
 
+    // cek jika restoran tidak ada
     if (restoran == null) {
       System.out.println("Restaurant not found.");
       return;
     }
 
     try {
+      // mencoba menambahkan menu
       String menuName = menuNameInput.getText();
       String price = priceInput.getText();
       DepeFood.handleTambahMenuRestoran(restoran, menuName, price);
 
+      // jika berhasil
       this.mainApp.showAlert("Success!", "Berhasil menambahkan menu " + menuName, "", AlertType.INFORMATION);
       this.menuNameInput.clear();
       this.priceInput.clear();
@@ -49,7 +56,21 @@ public class AddMenuForm extends VBox {
     }
   }
 
+  /**
+   * Method ini digunakan untuk kembali ke menu admin
+   */
+  private void kembali() {
+    // clear semua input di page ini
+    this.restoPicker.valueProperty().set(null);
+    this.menuNameInput.clear();
+    this.priceInput.clear();
+
+    // kembali
+    this.mainApp.previousScene();
+  }
+
   public AddMenuForm(MainApp mainApp, ObservableList<String> restoNames) {
+    // setting VBox awal
     super(10);
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(30, 30, 100, 30));
@@ -94,7 +115,7 @@ public class AddMenuForm extends VBox {
     // back button
     Button backButton = new Button();
     backButton.setText("Kembali");
-    backButton.setOnAction(e -> mainApp.previousScene());
+    backButton.setOnAction(e -> kembali());
     backButton.setPrefWidth(Double.MAX_VALUE);
     nodes.add(backButton);
   }

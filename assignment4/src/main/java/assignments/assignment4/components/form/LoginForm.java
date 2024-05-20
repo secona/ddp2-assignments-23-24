@@ -16,6 +16,7 @@ import assignments.assignment4.components.HeaderText;
 public class LoginForm {
     @SuppressWarnings("unused")
     private Stage stage;
+
     private MainApp mainApp; // MainApp instance
     private TextField nameInput;
     private TextField phoneNumberInput;
@@ -26,6 +27,7 @@ public class LoginForm {
     }
 
     private Scene createLoginForm() {
+        // setting VBox
         VBox layout = new VBox(30);
         layout.setPadding(new Insets(30, 30, 100, 30));
         layout.setAlignment(Pos.CENTER);
@@ -36,21 +38,17 @@ public class LoginForm {
         // create name input
         Text nameText = new Text();
         nameText.setText("Name: ");
-
         this.nameInput = new TextField();
-
-        VBox name = new VBox(nameText, this.nameInput);
 
         // create phone number input
         Text phoneNumberText = new Text();
         phoneNumberText.setText("Phone Number: ");
-
         this.phoneNumberInput = new TextField();
 
-        VBox phoneNumber = new VBox(phoneNumberText, this.phoneNumberInput);
-
         // create a VBox for input
-        VBox input = new VBox(5, name, phoneNumber);
+        VBox input = new VBox(5,
+                new VBox(nameText, this.nameInput),
+                new VBox(phoneNumberText, this.phoneNumberInput));
 
         // create login button
         Button loginButton = new Button();
@@ -66,11 +64,19 @@ public class LoginForm {
     }
 
     private void handleLogin() {
+        // mencoba login
         String nama = this.nameInput.getText();
         String nomorTelepon = this.phoneNumberInput.getText();
         User user = DepeFood.handleLogin(nama, nomorTelepon);
 
+        if (nama.equals("") || nomorTelepon.equals("")) {
+            mainApp.alertError("Error!", "Mohon masukkan nama dan nomor telepon!", "");
+            return;
+        }
+
+        // jika user tidak ditemukan
         if (user == null) {
+            // show error
             mainApp.alertError(
                     "Login Failed",
                     "User not found!",
@@ -80,6 +86,11 @@ public class LoginForm {
             return;
         }
 
+        // clear input
+        this.nameInput.clear();
+        this.phoneNumberInput.clear();
+
+        // jika user ditemukan
         mainApp.login(user);
     }
 

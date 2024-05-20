@@ -20,6 +20,19 @@ public class BillPrinter {
     private MainApp mainApp;
     private User user;
 
+    private TextField billInput;
+
+    /**
+     * Method ini digunakan ketika user ingin kembali ke main menu
+     */
+    private void kembali() {
+        // clear input
+        this.billInput.clear();
+
+        // kembali ke scene sebelumnya 
+        this.mainApp.previousScene();
+    }
+
     public BillPrinter(Stage stage, MainApp mainApp, User user) {
         this.stage = stage;
         this.mainApp = mainApp;
@@ -33,16 +46,16 @@ public class BillPrinter {
         ObservableList<Node> nodes = layout.getChildren();
 
         // header text
-        HeaderText header = new HeaderText("Print Bill");
+        HeaderText header = new HeaderText("Cetak Bill");
         nodes.add(header);
 
         // bill input
         Text billText = new Text("Order ID");
-        TextField billInput = new TextField();
-        nodes.add(new VBox(billText, billInput));
+        this.billInput = new TextField();
+        nodes.add(new VBox(billText, this.billInput));
 
         // print button
-        Button printButton = new Button("Print Bill");
+        Button printButton = new Button("Cetak");
         printButton.setPrefWidth(Double.MAX_VALUE);
         printButton.setOnAction(e -> printBill(billInput.getText()));
         nodes.add(printButton);
@@ -50,7 +63,7 @@ public class BillPrinter {
         // back button
         Button backButton = new Button("Kembali");
         backButton.setPrefWidth(Double.MAX_VALUE);
-        backButton.setOnAction(e -> mainApp.previousScene());
+        backButton.setOnAction(e -> this.kembali());
         nodes.add(backButton);
 
         return new Scene(layout, 400, 600);

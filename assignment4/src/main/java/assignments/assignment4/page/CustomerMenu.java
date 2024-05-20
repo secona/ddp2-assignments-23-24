@@ -47,6 +47,10 @@ public class CustomerMenu extends MemberMenu {
 
     @Override
     protected void refresh() {
+        this.scene = createBaseMenu();
+        this.addOrderScene = createTambahPesananForm();
+        this.printBillScene = createBillPrinter();
+        this.payBillScene = createBayarBillForm();
         this.cekSaldoScene = createCekSaldoScene();
     }
 

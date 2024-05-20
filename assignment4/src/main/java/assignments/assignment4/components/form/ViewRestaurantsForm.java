@@ -19,22 +19,26 @@ import javafx.scene.text.Text;
 public class ViewRestaurantsForm extends VBox {
   private ListView<String> listMenu;
   private ChoiceBox<String> restoPicker;
+  private MainApp mainApp;
 
   private void view() {
+    // mengambil nama restoran
     String restoName = this.restoPicker.getValue();
-
     if (restoName == null) {
       System.out.println("Please input a restaurant name");
       return;
     }
 
+    // mencari restoran
     Restaurant restoran = DepeFood.findRestaurant(restoName);
 
+    // jika tidak ditemukan
     if (restoran == null) {
       System.out.println("Restaurant not found.");
       return;
     }
 
+    // show menu ke admin
     this.listMenu.getItems().clear();
     for (Menu menu : restoran.getMenu()) {
       this.listMenu.getItems().add(String.format(
@@ -44,11 +48,26 @@ public class ViewRestaurantsForm extends VBox {
     }
   }
 
+  /**
+   * Method ini digunakan ketika user ingin kembali ke main menu
+   */
+  private void kembali() {
+    // clear inpus
+    this.restoPicker.valueProperty().set(null);
+    this.listMenu.getItems().clear();
+
+    // back to previous scene
+    this.mainApp.previousScene();
+  }
+
   public ViewRestaurantsForm(MainApp mainApp, ObservableList<String> restoNames) {
+    // setting VBox
     super(10);
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(30, 30, 100, 30));
     ObservableList<Node> nodes = this.getChildren();
+
+    this.mainApp = mainApp;
 
     // create header
     HeaderText header = new HeaderText("View Menu");
@@ -74,7 +93,7 @@ public class ViewRestaurantsForm extends VBox {
 
     // back button
     Button backButton = new Button("Kembali");
-    backButton.setOnAction(e -> mainApp.previousScene());
+    backButton.setOnAction(e -> kembali());
     backButton.setPrefWidth(Double.MAX_VALUE);
     nodes.add(backButton);
   }
