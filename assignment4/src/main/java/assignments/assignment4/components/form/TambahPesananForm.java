@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
@@ -20,21 +19,25 @@ import javafx.scene.text.Text;
 
 public class TambahPesananForm extends VBox {
   private MainApp mainApp;
-  private ObservableList<String> items;
-  private ObservableList<String> selectedItems;
+  private ObservableList<MenuDisplay> items;
+  private ObservableList<MenuDisplay> picked;
 
   /**
    * Method for when the user press create order
    */
   private void createOrder(String namaResto, String date) {
     System.out.print("Membuat Pesanan: ");
-    System.out.println(this.selectedItems.toString());
+    System.out.println(this.picked.toString());
 
     try {
-      String orderId = DepeFood.handleBuatPesanan(namaResto, date, selectedItems.size(), selectedItems);
-      mainApp.showAlert("Success!", "Order dengan ID " + orderId + " berhasil ditambahkan", "", AlertType.INFORMATION);
+      String orderId = DepeFood.handleBuatPesanan(
+          namaResto,
+          date,
+          picked.size(),
+          picked.stream().map(e -> e.menu.getNamaMakanan()).toList());
 
-      System.out.println(DepeFood.findUserOrderById(orderId));
+      mainApp.showAlert("Success!", "Order dengan ID " + orderId + " berhasil ditambahkan", "", AlertType.INFORMATION);
+      this.picked.clear();
     } catch (Exception ex) {
       mainApp.alertError("Error!", "Error Membuat Order", ex.getMessage());
     }
@@ -51,11 +54,19 @@ public class TambahPesananForm extends VBox {
     Restaurant resto = DepeFood.getRestaurantByName(namaResto);
 
     for (Menu menu : resto.getMenu()) {
-      this.items.add(menu.getNamaMakanan());
+      this.items.add(new MenuDisplay(menu));
     }
 
     System.out.print("Menampilkan Restaurant: ");
     System.out.println(namaResto);
+  }
+
+  private void addMenu(MenuDisplay menu) {
+    this.picked.add(menu);
+  }
+
+  private void removeMenu(MenuDisplay menu) {
+    this.picked.remove(menu);
   }
 
   public TambahPesananForm(MainApp mainApp) {
@@ -82,12 +93,29 @@ public class TambahPesananForm extends VBox {
     TextField dateInput = new TextField();
     nodes.add(new VBox(dateText, dateInput));
 
+    // menu picker
+    Text menuText = new Text("Select a Menu");
+    ComboBox<MenuDisplay> menuPicker = new ComboBox<>();
+    menuPicker.setPrefWidth(Double.MAX_VALUE);
+    this.items = menuPicker.getItems();
+    nodes.add(new VBox(menuText, menuPicker));
+
+    // menu button add
+    Button addMenuButton = new Button("Tambahkan");
+    addMenuButton.setPrefWidth(Double.MAX_VALUE);
+    addMenuButton.setOnAction(e -> addMenu(menuPicker.getValue()));
+    nodes.add(addMenuButton);
+
     // menu list
-    ListView<String> listMenu = new ListView<>();
-    this.items = listMenu.getItems();
-    this.selectedItems = listMenu.getSelectionModel().getSelectedItems();
-    listMenu.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    ListView<MenuDisplay> listMenu = new ListView<>();
+    this.picked = listMenu.getItems();
     nodes.add(listMenu);
+
+    // remove button
+    Button removeButton = new Button("Remove Selected");
+    removeButton.setPrefWidth(Double.MAX_VALUE);
+    removeButton.setOnAction(e -> removeMenu(listMenu.getSelectionModel().getSelectedItem()));
+    nodes.add(removeButton);
 
     // submit button
     Button submitButton = new Button("Buat Pesanan");
@@ -100,5 +128,18 @@ public class TambahPesananForm extends VBox {
     backButton.setPrefWidth(Double.MAX_VALUE);
     backButton.setOnAction(e -> mainApp.previousScene());
     nodes.add(backButton);
+  }
+
+  class MenuDisplay {
+    Menu menu;
+
+    MenuDisplay(Menu menu) {
+      this.menu = menu;
+    }
+
+    @Override
+    public String toString() {
+      return String.format("%s - Rp%.0f", this.menu.getNamaMakanan(), this.menu.getHarga());
+    }
   }
 }
