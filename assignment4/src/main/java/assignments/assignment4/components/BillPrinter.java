@@ -1,6 +1,8 @@
 package assignments.assignment4.components;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,27 +28,32 @@ public class BillPrinter {
 
     private Scene createBillPrinterForm() {
         VBox layout = new VBox(10);
+        layout.setPadding(new Insets(30, 30, 100, 30));
+        layout.setAlignment(Pos.CENTER);
         ObservableList<Node> nodes = layout.getChildren();
 
         // header text
-        HeaderText header = new HeaderText("Bill");
+        HeaderText header = new HeaderText("Print Bill");
         nodes.add(header);
 
         // bill input
+        Text billText = new Text("Order ID");
         TextField billInput = new TextField();
-        nodes.add(billInput);
+        nodes.add(new VBox(billText, billInput));
 
         // print button
         Button printButton = new Button("Print Bill");
+        printButton.setPrefWidth(Double.MAX_VALUE);
         printButton.setOnAction(e -> printBill(billInput.getText()));
         nodes.add(printButton);
 
         // back button
         Button backButton = new Button("Kembali");
+        backButton.setPrefWidth(Double.MAX_VALUE);
         backButton.setOnAction(e -> mainApp.previousScene());
         nodes.add(backButton);
 
-        return new Scene(layout, 400, 200);
+        return new Scene(layout, 400, 600);
     }
 
     private void printBill(String orderId) {
@@ -60,7 +67,13 @@ public class BillPrinter {
         }
 
         VBox layout = new VBox(10);
+        layout.setPadding(new Insets(30, 30, 100, 30));
+        layout.setAlignment(Pos.CENTER);
         ObservableList<Node> nodes = layout.getChildren();
+
+        // your bill text
+        HeaderText header = new HeaderText("Bill Anda");
+        nodes.add(header);
 
         // bill
         Text bill = new Text();
@@ -69,10 +82,11 @@ public class BillPrinter {
 
         // back button
         Button backButton = new Button("Kembali");
+        backButton.setPrefWidth(Double.MAX_VALUE);
         backButton.setOnAction(e -> mainApp.previousScene());
         nodes.add(backButton);
 
-        Scene scene = new Scene(layout, 400, 200);
+        Scene scene = new Scene(layout, 400, 600);
         mainApp.setScene(scene);
     }
 

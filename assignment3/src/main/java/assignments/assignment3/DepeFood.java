@@ -102,8 +102,21 @@ public class DepeFood {
         return null;
     }
 
-    public static void handleTambahMenuRestoran(Restaurant restoran, String namaMakanan, double harga) {
-        restoran.addMenu(new Menu(namaMakanan, harga));
+    public static void handleTambahMenuRestoran(Restaurant restoran, String namaMakanan, String harga) throws Exception {
+        if (namaMakanan.equals("")) {
+            throw new Exception("Nama makanan tidak boleh kosong!");
+        }
+
+        if (harga.equals("")) {
+            throw new Exception("Harga tidak boleh kosong!");
+        }
+
+        try {
+            double hargaDouble = Double.parseDouble(harga);
+            restoran.addMenu(new Menu(namaMakanan, hargaDouble));
+        } catch (NumberFormatException ex) {
+            throw new Exception("Harga harus berupa angka!");
+        }
     }
 
     public static List<Restaurant> getRestoList() {

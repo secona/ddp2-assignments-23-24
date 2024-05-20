@@ -37,7 +37,10 @@ public class ViewRestaurantsForm extends VBox {
 
     this.listMenu.getItems().clear();
     for (Menu menu : restoran.getMenu()) {
-      this.listMenu.getItems().add(menu.toString());
+      this.listMenu.getItems().add(String.format(
+          "%s - Rp%.0f",
+          menu.getNamaMakanan(),
+          menu.getHarga()));
     }
   }
 
@@ -56,19 +59,14 @@ public class ViewRestaurantsForm extends VBox {
     this.restoPicker = new ChoiceBox<String>();
     this.restoPicker.setPrefWidth(Double.MAX_VALUE);
     this.restoPicker.getItems().setAll(restoNames);
+    this.restoPicker.setOnAction(e -> view());
     nodes.add(new VBox(restoPickerText, this.restoPicker));
-    
+
     // add listener for when restoNames changes
     restoNames.addListener((ListChangeListener<String>) c -> {
       // update comboBox items to match with the new values
       this.restoPicker.getItems().setAll(c.getList());
     });
-
-    // view button
-    Button viewButton = new Button("Search");
-    viewButton.setOnAction(e -> view());
-    viewButton.setPrefWidth(Double.MAX_VALUE);
-    nodes.add(viewButton);
 
     // list menu
     this.listMenu = new ListView<>();

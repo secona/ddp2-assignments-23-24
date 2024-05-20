@@ -1,6 +1,8 @@
 package assignments.assignment4.page;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -51,6 +53,8 @@ public class CustomerMenu extends MemberMenu {
     @Override
     public Scene createBaseMenu() {
         VBox menuLayout = new VBox(10);
+        menuLayout.setAlignment(Pos.CENTER);
+        menuLayout.setPadding(new Insets(30, 30, 100, 30));
         ObservableList<Node> nodes = menuLayout.getChildren();
 
         // create text
@@ -61,45 +65,40 @@ public class CustomerMenu extends MemberMenu {
         // create buat pesanan button
         Button buatPesananButton = new Button();
         buatPesananButton.setText("Buat Pesanan");
-        buatPesananButton.setOnAction(e -> {
-            mainApp.setScene(this.addOrderScene);
-        });
-
+        buatPesananButton.setPrefWidth(Double.MAX_VALUE);
+        buatPesananButton.setOnAction(e -> mainApp.setScene(this.addOrderScene));
         nodes.add(buatPesananButton);
 
         // create cetak bill button
         Button cetakBillButton = new Button();
         cetakBillButton.setText("Cetak Bill");
-        cetakBillButton.setOnAction(e -> {
-            mainApp.setScene(this.printBillScene);
-        });
+        cetakBillButton.setPrefWidth(Double.MAX_VALUE);
+        cetakBillButton.setOnAction(e -> mainApp.setScene(this.printBillScene));
 
         nodes.add(cetakBillButton);
 
         // create bayar bill button
         Button bayarBillButton = new Button();
         bayarBillButton.setText("Bayar Bill");
-        bayarBillButton.setOnAction(e -> {
-            mainApp.setScene(this.payBillScene);
-        });
-
+        bayarBillButton.setPrefWidth(Double.MAX_VALUE);
+        bayarBillButton.setOnAction(e -> mainApp.setScene(this.payBillScene));
         nodes.add(bayarBillButton);
 
         // create cek saldo button
         Button cekSaldoButton = new Button();
         cekSaldoButton.setText("Cek Saldo");
+        cekSaldoButton.setPrefWidth(Double.MAX_VALUE);
         cekSaldoButton.setOnAction(e -> {
             this.refresh();
             mainApp.setScene(this.cekSaldoScene);
         });
-
         nodes.add(cekSaldoButton);
 
         // create logout button
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
+        logoutButton.setPrefWidth(Double.MAX_VALUE);
         logoutButton.setOnAction(e -> mainApp.logout());
-
         nodes.add(logoutButton);
 
         return new Scene(menuLayout, 400, 600);

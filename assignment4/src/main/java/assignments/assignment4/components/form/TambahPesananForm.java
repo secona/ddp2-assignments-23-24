@@ -6,6 +6,8 @@ import assignments.assignment3.DepeFood;
 import assignments.assignment4.MainApp;
 import assignments.assignment4.components.HeaderText;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -58,25 +60,27 @@ public class TambahPesananForm extends VBox {
 
   public TambahPesananForm(MainApp mainApp) {
     super(10);
-    ObservableList<Node> nodes = this.getChildren();
+    this.setAlignment(Pos.CENTER);
+    this.setPadding(new Insets(30, 30, 100, 30));
     this.mainApp = mainApp;
+    ObservableList<Node> nodes = this.getChildren();
 
     // create header
     HeaderText header = new HeaderText("Order Food");
     nodes.add(header);
 
     // restaurant picker
+    Text restoText = new Text("Restaurant");
     ComboBox<String> restoPicker = new ComboBox<>();
+    restoPicker.setPrefWidth(Double.MAX_VALUE);
     restoPicker.getItems().addAll(DepeFood.getRestoNames());
     restoPicker.setOnAction(v -> changeMenu(restoPicker.getValue()));
-    nodes.add(restoPicker);
+    nodes.add(new VBox(restoText, restoPicker));
 
     // date input
     Text dateText = new Text("Date (DD/MM/YYYY)");
-    nodes.add(dateText);
-
     TextField dateInput = new TextField();
-    nodes.add(dateInput);
+    nodes.add(new VBox(dateText, dateInput));
 
     // menu list
     ListView<String> listMenu = new ListView<>();
@@ -87,11 +91,13 @@ public class TambahPesananForm extends VBox {
 
     // submit button
     Button submitButton = new Button("Buat Pesanan");
+    submitButton.setPrefWidth(Double.MAX_VALUE);
     submitButton.setOnAction(e -> createOrder(restoPicker.getValue(), dateInput.getText()));
     nodes.add(submitButton);
 
     // back button
     Button backButton = new Button("Kembali");
+    backButton.setPrefWidth(Double.MAX_VALUE);
     backButton.setOnAction(e -> mainApp.previousScene());
     nodes.add(backButton);
   }

@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -19,6 +20,7 @@ public class AddMenuForm extends VBox {
   private ChoiceBox<String> restoPicker;
   private TextField menuNameInput;
   private TextField priceInput;
+  private MainApp mainApp;
 
   private void addMenu() {
     String restoName = this.restoPicker.getValue();
@@ -36,12 +38,14 @@ public class AddMenuForm extends VBox {
 
     try {
       String menuName = menuNameInput.getText();
-      double price = Double.parseDouble(priceInput.getText());
+      String price = priceInput.getText();
       DepeFood.handleTambahMenuRestoran(restoran, menuName, price);
 
-      System.out.println(restoran.getMenu());
+      this.mainApp.showAlert("Success!", "Berhasil menambahkan menu " + menuName, "", AlertType.INFORMATION);
+      this.menuNameInput.clear();
+      this.priceInput.clear();
     } catch (Exception ex) {
-      System.out.println("Gagal menambahkan menu");
+      this.mainApp.alertError("Error!", ex.getMessage(), "");
     }
   }
 
@@ -50,6 +54,8 @@ public class AddMenuForm extends VBox {
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(30, 30, 100, 30));
     ObservableList<Node> nodes = this.getChildren();
+
+    this.mainApp = mainApp;
 
     // create header
     HeaderText header = new HeaderText("Add Menu");
@@ -61,7 +67,7 @@ public class AddMenuForm extends VBox {
     this.restoPicker.setPrefWidth(Double.MAX_VALUE);
     this.restoPicker.getItems().setAll(restoNames);
     nodes.add(new VBox(restoPickerText, this.restoPicker));
-    
+
     // add listener for when restoNames changes
     restoNames.addListener((ListChangeListener<String>) c -> {
       // update comboBox items to match with the new values
